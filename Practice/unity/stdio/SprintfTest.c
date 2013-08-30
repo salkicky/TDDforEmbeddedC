@@ -1,3 +1,5 @@
+#include "unity.h"
+
 TEST(sprintf, NoFormatOperations)
 {
     char output[5];
