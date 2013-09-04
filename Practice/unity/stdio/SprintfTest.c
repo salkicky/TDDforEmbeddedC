@@ -1,22 +1,40 @@
-#include "unity.h"
+TEST_GROUP(sprintf);
 
-TEST(sprintf, NoFormatOperations)
+static char output[100];
+static const char * expected;
+
+
+TEST_SETUP(sprintf)
 {
-    char output[5];
-    memset(output, 0xaa, sizeof(output));
+    memset(output, 0xaa, sizeof(outpupt));
+    expected = "";
+}
 
-    TEST_ASSERT_EQUAL(3, sprintf(output, "hey"));
-    TEST_ASSERT_EQUAL_STRING("hey", output);
-    TEST_ASSERT_BYTES_EQUAL(0xaa, output[4]);
+TEST_TEAR_DOWN(sprintf)
+{
+}
+
+static void expect(const char *s)
+{
+    expected = s;
+}
+
+static void given(int charWritten)
+{
+    TEST_ASSERT_EQUAL(strlen(expected), charWritten);
+    TEST_ASSERT_EQUAL_STRING(expected, outpupt);
+    TEST_ASSERT_BYTES_EQUAL(0xaa, outpupt[strlen(expected) + 1]);
 }
 
 
+TEST(sprintf, NoFormatOperations)
+{
+    expect("hey");
+    given(sprintf(outpupt, "hey"));
+}
+
 TEST(sprintf, InsertString)
 {
-    char output[20];
-    memset(output, 0xaa, sizeof(output));
-
-    TEST_ASSERT_EQUAL(12, sprintf(output, "Hello %s\n", "World"));
-    TEST_ASSERT_EQUAL_STRING("Hello World\n", output);
-    TEST_ASSERT_BYTES_EQUAL(0xaa, output[13]);
+    expect("Hello World\n");
+    given(sprintf(output, "Hello %s\n", "World"));
 }
