@@ -1,3 +1,7 @@
+#include "unity_fixture.h"
+#include <stdio.h>
+#include <memory.h>
+
 TEST_GROUP(sprintf);
 
 static char output[100];
@@ -6,7 +10,7 @@ static const char * expected;
 
 TEST_SETUP(sprintf)
 {
-    memset(output, 0xaa, sizeof(outpupt));
+    memset(output, 0xaa, sizeof(output));
     expected = "";
 }
 
@@ -22,15 +26,15 @@ static void expect(const char *s)
 static void given(int charWritten)
 {
     TEST_ASSERT_EQUAL(strlen(expected), charWritten);
-    TEST_ASSERT_EQUAL_STRING(expected, outpupt);
-    TEST_ASSERT_BYTES_EQUAL(0xaa, outpupt[strlen(expected) + 1]);
+    TEST_ASSERT_EQUAL_STRING(expected, output);
+    TEST_ASSERT_BYTES_EQUAL(0xaa, output[strlen(expected) + 1]);
 }
 
 
 TEST(sprintf, NoFormatOperations)
 {
     expect("hey");
-    given(sprintf(outpupt, "hey"));
+    given(sprintf(output, "hey"));
 }
 
 TEST(sprintf, InsertString)
