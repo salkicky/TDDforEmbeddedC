@@ -1,4 +1,6 @@
 #include "unity_fixture.h"
+#include <stdlib.h>
+#include "LedDriver.h"
 
 TEST_GROUP(LedDriver);
 
@@ -12,6 +14,8 @@ TEST_TEAR_DOWN(LedDriver)
 
 TEST(LedDriver, LedsOffAfterCreate)
 {
-	TEST_FAIL_MESSAGE("Start here")
+    UINT16  virtualLeds = 0xffff;
+    LedDriver_Create(&virtualLeds);
+    TEST_ASSERT_EQUAL_HEX16(0, virtualLeds);
 }
 

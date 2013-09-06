@@ -31,6 +31,7 @@ TEST_SRC_DIRS = \
 
 INCLUDE_DIRS =\
   .\
+  $(PROJECT_TEST_DIR)/LedDriver\
   $(UNITY_HOME)/src\
   $(UNITY_HOME)/extras/fixture/src\
   $(UNITY_HOME)/extras/fixture/test\
