@@ -23,6 +23,7 @@ SRC_DIRS = \
 TEST_SRC_DIRS = \
 	$(PROJECT_TEST_DIR)\
 	$(PROJECT_TEST_DIR)/stdio\
+	$(PROJECT_TEST_DIR)/LedDriver\
 	$(UNITY_HOME)/unity\
 	$(UNITY_HOME)/src\
     $(UNITY_HOME)/extras/fixture/src\
