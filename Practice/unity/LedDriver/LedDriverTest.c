@@ -19,3 +19,11 @@ TEST(LedDriver, LedsOffAfterCreate)
     TEST_ASSERT_EQUAL_HEX16(0, virtualLeds);
 }
 
+TEST(LedDriver, LedsTurnOn)
+{
+    UINT16  virtualLeds = 0xffff;
+    LedDriver_Create(&virtualLeds);
+    LedDriver_TurnOn(1);
+    TEST_ASSERT_EQUAL_HEX16(0xfffe, virtualLeds); 
+
+}
