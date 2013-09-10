@@ -9,12 +9,12 @@ void LedDriver_Create(UINT16 * address)
     *led_address = 0;
 }
 
-void LedDriver_TurnOn(int id)
+void LedDriver_TurnOn(int led_number)
 {
     *led_address = 1;
 }
 
-void LedDriver_TurnOff(int id)
+void LedDriver_TurnOff(int led_number)
 {
     *led_address = 0;
 }
