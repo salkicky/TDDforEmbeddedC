@@ -10,7 +10,7 @@ static UINT16   *led_address;
 static UINT16 convertLedNumberToBit(int led_numer);
 
 
-//-- function ---------------------------------------
+//-- PUBLIC ---------------------------------------
 // Create, and initialize LEDs
 void LedDriver_Create(UINT16 * address)
 {
@@ -27,9 +27,10 @@ void LedDriver_TurnOn(int led_number)
 // Turn off LED
 void LedDriver_TurnOff(int led_number)
 {
-    *led_address = 0;
+    *led_address &= ~(convertLedNumberToBit(led_number));
 }
 
+//--- PRIVATE ------------------------------------------
 // convert LED number to bit
 UINT16 convertLedNumberToBit(int led_number)
 {
