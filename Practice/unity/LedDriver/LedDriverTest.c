@@ -37,3 +37,10 @@ TEST(LedDriver, TurnOffLedOne)
     LedDriver_TurnOff(1);
     TEST_ASSERT_EQUAL_HEX16(0, virtual_leds); 
 }
+
+TEST(LedDriver, TurnOnMultipleLeds)
+{
+    LedDriver_TurnOn(9);
+    LedDriver_TurnOn(8);
+    TEST_ASSERT_EQUAL_HEX16(0x0180, virtual_leds);
+}
