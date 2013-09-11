@@ -30,6 +30,12 @@ void LedDriver_TurnOff(int led_number)
     *led_address &= ~(convertLedNumberToBit(led_number));
 }
 
+// TurnOn All LEDs
+void LedDriver_TurnAllOn(void)
+{
+    *led_address = 0xffff;
+}
+
 //--- PRIVATE ------------------------------------------
 // convert LED number to bit
 UINT16 convertLedNumberToBit(int led_number)
