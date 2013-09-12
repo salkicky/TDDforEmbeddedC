@@ -6,6 +6,7 @@
 
 //-- static variable -------------------------------
 static UINT16   *led_address;
+static UINT16   led_image;
 
 
 //-- prototype --------------------------------------
@@ -17,31 +18,36 @@ static UINT16 convertLedNumberToBit(int led_numer);
 void LedDriver_Create(UINT16 * address)
 {
     led_address = address;
-    *led_address = 0;
+    led_image = 0;
+    *led_address = led_image;
 }
 
 // TurnOn LED
 void LedDriver_TurnOn(int led_number)
 {
-    *led_address |= convertLedNumberToBit(led_number); 
+    led_image |= convertLedNumberToBit(led_number); 
+    *led_address = led_image;
 }
 
 // Turn off LED
 void LedDriver_TurnOff(int led_number)
 {
-    *led_address &= ~(convertLedNumberToBit(led_number));
+    led_image &= ~(convertLedNumberToBit(led_number));
+    *led_address = led_image;
 }
 
 // TurnOn All LEDs
 void LedDriver_TurnAllOn(void)
 {
-    *led_address = ALL_LEDS_ON;
+    led_image = ALL_LEDS_ON;
+    *led_address = led_image;
 }
 
 // TurnOff All LEDs
 void LedDriver_TurnAllOff(void)
 {
-    *led_address = ALL_LEDS_OFF;
+    led_image = ALL_LEDS_OFF;
+    *led_address = led_image;
 }
 
 
