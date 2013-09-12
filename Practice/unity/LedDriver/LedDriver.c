@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include "LedDriver.h"
 
-#define ALL_LEDS_ON     0xffff
+#define ALL_LEDS_OFF    0
+#define ALL_LEDS_ON     ~(ALL_LEDS_OFF) 
 
 //-- static variable -------------------------------
 static UINT16   *led_address;
@@ -36,6 +37,13 @@ void LedDriver_TurnAllOn(void)
 {
     *led_address = ALL_LEDS_ON;
 }
+
+// TurnOff All LEDs
+void LedDriver_TurnAllOff(void)
+{
+    *led_address = ~(ALL_LEDS_ON);
+}
+
 
 //--- PRIVATE ------------------------------------------
 // convert LED number to bit
