@@ -38,12 +38,14 @@ TEST(LedDriver, TurnOffLedOne)
     TEST_ASSERT_EQUAL_HEX16(0, virtual_leds); 
 }
 
+
 TEST(LedDriver, TurnOnMultipleLeds)
 {
     LedDriver_TurnOn(9);
     LedDriver_TurnOn(8);
     TEST_ASSERT_EQUAL_HEX16(0x0180, virtual_leds);
 }
+
 
 TEST(LedDriver, TurnOffAnyLeds)
 {
@@ -52,14 +54,26 @@ TEST(LedDriver, TurnOffAnyLeds)
     TEST_ASSERT_EQUAL_HEX16(0xFF7F, virtual_leds);
 }
 
+
 TEST(LedDriver, AllOn)
 {
     LedDriver_TurnAllOn();
     TEST_ASSERT_EQUAL_HEX16(0xFFFF, virtual_leds);
 }
 
+
 TEST(LedDriver, AllOff)
 {
     LedDriver_TurnAllOff();
     TEST_ASSERT_EQUAL_HEX16(0x0000, virtual_leds);
 }
+
+
+TEST(LedDriver, LedMemoryIsNotReadable)
+{
+    virtual_leds = 0xffff;
+    LedDriver_TurnOn(8);
+    TEST_ASSERT_EQUAL_HEX16(0x0080, virtual_leds);
+}
+
+
