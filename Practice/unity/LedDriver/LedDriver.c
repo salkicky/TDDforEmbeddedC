@@ -41,7 +41,7 @@ void LedDriver_TurnAllOn(void)
 // TurnOff All LEDs
 void LedDriver_TurnAllOff(void)
 {
-    *led_address = ~(ALL_LEDS_ON);
+    *led_address = ALL_LEDS_OFF;
 }
 
 
