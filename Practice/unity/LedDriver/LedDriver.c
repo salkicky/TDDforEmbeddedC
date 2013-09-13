@@ -6,11 +6,12 @@
 
 //-- static variable -------------------------------
 static UINT16   *led_address;
-static UINT16   led_image;
+static UINT16   leds_image;
 
 
 //-- prototype --------------------------------------
 static UINT16 convertLedNumberToBit(int led_numer);
+static void   updateLedHardware(void);
 
 
 //-- PUBLIC ---------------------------------------
@@ -18,36 +19,37 @@ static UINT16 convertLedNumberToBit(int led_numer);
 void LedDriver_Create(UINT16 * address)
 {
     led_address = address;
-    led_image = 0;
-    *led_address = led_image;
+
+    leds_image = 0;
+    updateLedHardware();
 }
 
 // TurnOn LED
 void LedDriver_TurnOn(int led_number)
 {
-    led_image |= convertLedNumberToBit(led_number); 
-    *led_address = led_image;
+    leds_image |= convertLedNumberToBit(led_number); 
+    updateLedHardware();
 }
 
 // Turn off LED
 void LedDriver_TurnOff(int led_number)
 {
-    led_image &= ~(convertLedNumberToBit(led_number));
-    *led_address = led_image;
+    leds_image &= ~(convertLedNumberToBit(led_number));
+    updateLedHardware();
 }
 
 // TurnOn All LEDs
 void LedDriver_TurnAllOn(void)
 {
-    led_image = ALL_LEDS_ON;
-    *led_address = led_image;
+    leds_image = ALL_LEDS_ON;
+    updateLedHardware();
 }
 
 // TurnOff All LEDs
 void LedDriver_TurnAllOff(void)
 {
-    led_image = ALL_LEDS_OFF;
-    *led_address = led_image;
+    leds_image = ALL_LEDS_OFF;
+    updateLedHardware();
 }
 
 
@@ -56,4 +58,10 @@ void LedDriver_TurnAllOff(void)
 UINT16 convertLedNumberToBit(int led_number)
 {
     return (1 << (led_number - 1));
+}
+
+// update LED Hardware
+void updateLedHardware(void)
+{
+    *led_address = leds_image;
 }
