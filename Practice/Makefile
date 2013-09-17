@@ -24,6 +24,7 @@ TEST_SRC_DIRS = \
 	$(PROJECT_TEST_DIR)\
 	$(PROJECT_TEST_DIR)/stdio\
 	$(PROJECT_TEST_DIR)/LedDriver\
+	$(PROJECT_TEST_DIR)/mocks\
 	$(UNITY_HOME)/unity\
 	$(UNITY_HOME)/src\
     $(UNITY_HOME)/extras/fixture/src\
@@ -32,6 +33,7 @@ TEST_SRC_DIRS = \
 INCLUDE_DIRS =\
   .\
   $(PROJECT_TEST_DIR)/LedDriver\
+  $(PROJECT_TEST_DIR)/mocks\
   $(UNITY_HOME)/src\
   $(UNITY_HOME)/extras/fixture/src\
   $(UNITY_HOME)/extras/fixture/test\
