@@ -1,6 +1,7 @@
 #include "unity_fixture.h"
 #include <stdlib.h>
 #include "LedDriver.h"
+#include "RuntimeErrorStub.h"
 
 TEST_GROUP(LedDriver);
 
@@ -102,4 +103,12 @@ TEST(LedDriver, OutOfBoundsTurnOffDoesNoHarm)
     LedDriver_TurnOff(17);
     LedDriver_TurnOff(3141);
     TEST_ASSERT_EQUAL_HEX16(0xffff, virtual_leds);
+}
+
+TEST(LedDriver, CheckErrorMessageOfOutOfBoubds)
+{
+	LedDriver_TurnOn(-1);
+    TEST_ASSERT_EQUAL_STRING("LED Driver : out-of-bounds LED",
+            RuntimeErrorStub_getLastError());
+    TEST_ASSERT_EQUAL(-1, RuntimeErrorStub_getLastParameter());
 }

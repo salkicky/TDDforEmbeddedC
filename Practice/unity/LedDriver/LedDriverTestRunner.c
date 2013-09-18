@@ -19,5 +19,7 @@ TEST_GROUP_RUNNER(LedDriver)
     RUN_TEST_CASE(LedDriver, OutOfBoundsTurnOnDoesNoHarm);
     RUN_TEST_CASE(LedDriver, OutOfBoundsTurnOffDoesNoHarm);
 
+    RUN_TEST_CASE(LedDriver, CheckErrorMessageOfOutOfBoubds);
+
 }
 
