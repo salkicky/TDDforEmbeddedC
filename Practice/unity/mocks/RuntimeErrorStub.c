@@ -16,7 +16,7 @@ const char * RuntimeErrorStub_getLastError(void)
     return message;
 }
 
-void RunTimeError(const char *m, int p, const char * f, int l)
+void RuntimeError(const char *m, int p, const char * f, int l)
 {
     message = m;
     parameter = p;

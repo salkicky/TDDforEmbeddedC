@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "LedDriver.h"
+#include "RuntimeError.h"
 
 #define ALL_LEDS_OFF    0
 #define ALL_LEDS_ON     ~(ALL_LEDS_OFF) 
@@ -29,6 +30,7 @@ void LedDriver_TurnOn(int led_number)
 {
     if ((led_number <= 0) || (16 < led_number))
     {
+        RUNTIME_ERROR("LED Driver : out-of-bounds LED", -1);
         return;
     }
 
@@ -41,6 +43,7 @@ void LedDriver_TurnOff(int led_number)
 {
     if ((led_number <= 0) || (16 < led_number))
     {
+        RUNTIME_ERROR("LED Driver : out-of-bounds LED", -1);
         return;
     }
 
