@@ -2,8 +2,7 @@
 #define LED_DRIVER_H
 
 #include "RuntimeErrorStub.h"
-
-#define UINT16  unsigned short
+#include "LedType.h"
 
 void LedDriver_Create(UINT16 * address);
 void LedDriver_TurnOn(int led_number);
