@@ -73,7 +73,11 @@ void LedDriver_TurnAllOff(void)
 // return led on status
 BOOL LedDriver_isOn(int led_number)
 {
-    return FALSE;
+    if (leds_image & convertLedNumberToBit(led_number)) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
 }
 
 //--- PRIVATE ------------------------------------------
