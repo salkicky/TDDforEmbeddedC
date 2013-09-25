@@ -70,6 +70,11 @@ void LedDriver_TurnAllOff(void)
     updateLedHardware();
 }
 
+// return led on status
+BOOL LedDriver_isOn(int led_number)
+{
+    return FALSE;
+}
 
 //--- PRIVATE ------------------------------------------
 // convert LED number to bit

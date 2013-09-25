@@ -128,4 +128,3 @@ TEST(LedDriver, isOn)
     LedDriver_TurnOn(11);
     TEST_ASSERT_TRUE(LedDriver_isOn(11));
 }
-}

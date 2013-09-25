@@ -10,4 +10,6 @@ void LedDriver_TurnOff(int led_number);
 void LedDriver_TurnAllOn(void);
 void LedDriver_TurnAllOff(void);
 
+BOOL LedDriver_isOn(int led_number);
+
 #endif
