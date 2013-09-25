@@ -121,3 +121,11 @@ TEST(LedDriver, CheckErrorMessageOfOutOfBoubdsTurnOff)
     TEST_ASSERT_EQUAL(-1, RuntimeErrorStub_getLastParameter());
 }
 
+// get led status
+TEST(LedDriver, isOn)
+{
+    TEST_ASSERT_FALSE(LedDriver_isOn(11));
+    LedDriver_TurnOn(11);
+    TEST_ASSERT_TRUE(LedDriver_isOn(11));
+}
+}
