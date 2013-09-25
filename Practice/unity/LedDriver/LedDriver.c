@@ -12,11 +12,12 @@ static UINT16   leds_image;
 //-- data ------------------------------------------
 enum { FIRST_LED=1, LAST_LED=16};
 
-//-- data ------------------------------------------
 //-- prototype --------------------------------------
 static UINT16 convertLedNumberToBit(int led_numer);
 static void   updateLedHardware(void);
 static BOOL   isLedOutOfBounds(int led_number);
+static void   setImageBit(int led_number);
+static void   clearImageBit(int led_number);
 
 
 //-- PUBLIC ---------------------------------------
@@ -38,7 +39,7 @@ void LedDriver_TurnOn(int led_number)
         return;
     }
 
-    leds_image |= convertLedNumberToBit(led_number); 
+    setImageBit(led_number);
     updateLedHardware();
 }
 
@@ -51,7 +52,7 @@ void LedDriver_TurnOff(int led_number)
         return;
     }
 
-    leds_image &= ~(convertLedNumberToBit(led_number));
+    clearImageBit(led_number);
     updateLedHardware();
 }
 
@@ -95,4 +96,16 @@ BOOL isLedOutOfBounds(int led_number)
     {
         return FALSE;
     }
+}
+
+// set led image bit
+void setImageBit(int led_number)
+{
+    leds_image |= convertLedNumberToBit(led_number); 
+}
+
+// clear led image bit
+void clearImageBit(int led_number)
+{
+    leds_image &= ~(convertLedNumberToBit(led_number));
 }
