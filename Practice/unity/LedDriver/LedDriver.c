@@ -9,7 +9,10 @@
 static UINT16   *led_address;
 static UINT16   leds_image;
 
+//-- data ------------------------------------------
+enum { FIRST_LED=1, LAST_LED=16};
 
+//-- data ------------------------------------------
 //-- prototype --------------------------------------
 static UINT16 convertLedNumberToBit(int led_numer);
 static void   updateLedHardware(void);
@@ -83,7 +86,7 @@ void updateLedHardware(void)
 // check out of bounds
 BOOL isLedOutOfBounds(int led_number)
 {
-    if ((led_number <= 0) || (16 < led_number))
+    if ((led_number < FIRST_LED) || (LAST_LED < led_number))
     {
         // out of range
         return TRUE;
