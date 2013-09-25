@@ -9,7 +9,7 @@
 static UINT16   *led_address;
 static UINT16   leds_image;
 
-//-- data ------------------------------------------
+//-- local variable  ------------------------------------------
 enum { FIRST_LED=1, LAST_LED=16};
 
 //-- prototype --------------------------------------
@@ -73,6 +73,12 @@ void LedDriver_TurnAllOff(void)
 // return led on status
 BOOL LedDriver_isOn(int led_number)
 {
+    if (TRUE == isLedOutOfBounds(led_number))
+    {
+        RUNTIME_ERROR("LED Driver : out-of-bounds LED", -1);
+        return FALSE;
+    }
+
     if (leds_image & convertLedNumberToBit(led_number)) {
         return TRUE;
     } else {

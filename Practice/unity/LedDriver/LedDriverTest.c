@@ -128,3 +128,10 @@ TEST(LedDriver, isOn)
     LedDriver_TurnOn(11);
     TEST_ASSERT_TRUE(LedDriver_isOn(11));
 }
+
+TEST(LedDriver, CheckErrorMessageOfOutOfBoubdsIsOn)
+{
+	LedDriver_isOn(17);
+    TEST_ASSERT_EQUAL_STRING("LED Driver : out-of-bounds LED", RuntimeErrorStub_getLastError());
+    TEST_ASSERT_EQUAL(-1, RuntimeErrorStub_getLastParameter());
+}
