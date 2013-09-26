@@ -33,9 +33,7 @@ void LedDriver_Create(UINT16 * address)
 // TurnOn LED
 void LedDriver_TurnOn(int led_number)
 {
-    if (TRUE == isLedOutOfBounds(led_number))
-    {
-        RUNTIME_ERROR("LED Driver : out-of-bounds LED", -1);
+    if (TRUE == isLedOutOfBounds(led_number)) {
         return;
     }
 
@@ -46,9 +44,7 @@ void LedDriver_TurnOn(int led_number)
 // Turn off LED
 void LedDriver_TurnOff(int led_number)
 {
-    if (TRUE == isLedOutOfBounds(led_number))
-    {
-        RUNTIME_ERROR("LED Driver : out-of-bounds LED", -1);
+    if (TRUE == isLedOutOfBounds(led_number)) {
         return;
     }
 
@@ -73,9 +69,7 @@ void LedDriver_TurnAllOff(void)
 // return led on status
 BOOL LedDriver_isOn(int led_number)
 {
-    if (TRUE == isLedOutOfBounds(led_number))
-    {
-        RUNTIME_ERROR("LED Driver : out-of-bounds LED", -1);
+    if (TRUE == isLedOutOfBounds(led_number)) {
         return FALSE;
     }
 
@@ -83,6 +77,20 @@ BOOL LedDriver_isOn(int led_number)
         return TRUE;
     } else {
         return FALSE;
+    }
+}
+
+// return led off status
+BOOL LedDriver_isOff(int led_number)
+{
+    if (TRUE == isLedOutOfBounds(led_number)) {
+        return FALSE;
+    }
+
+    if (TRUE == LedDriver_isOn(led_number)) {
+        return FALSE;
+    } else {
+        return TRUE;
     }
 }
 
@@ -102,13 +110,12 @@ void updateLedHardware(void)
 // check out of bounds
 BOOL isLedOutOfBounds(int led_number)
 {
-    if ((led_number < FIRST_LED) || (LAST_LED < led_number))
-    {
+    if ((led_number < FIRST_LED) || (LAST_LED < led_number)) {
         // out of range
+        RUNTIME_ERROR("LED Driver : out-of-bounds LED", -1);
         return TRUE;
     }
-    else
-    {
+    else {
         return FALSE;
     }
 }

@@ -77,7 +77,7 @@ TEST(LedDriver, LedMemoryIsNotReadable)
     TEST_ASSERT_EQUAL_HEX16(0x0080, virtual_leds);
 }
 
-// 境界条件のテスト
+// 境界条件のテスト max, min
 TEST(LedDriver, UpperAndLowerBounds)
 {
     LedDriver_TurnOn(1);
@@ -85,7 +85,7 @@ TEST(LedDriver, UpperAndLowerBounds)
     TEST_ASSERT_EQUAL_HEX16(0x8001, virtual_leds);
 }
 
-
+// 境界条件のテスト TurnOn
 TEST(LedDriver, OutOfBoundsTurnOnDoesNoHarm)
 {
     LedDriver_TurnOn(-1);
@@ -95,6 +95,7 @@ TEST(LedDriver, OutOfBoundsTurnOnDoesNoHarm)
     TEST_ASSERT_EQUAL_HEX16(0, virtual_leds);
 }
 
+// 境界条件のテスト TurnOff
 TEST(LedDriver, OutOfBoundsTurnOffDoesNoHarm)
 {
     LedDriver_TurnAllOn();
@@ -105,7 +106,7 @@ TEST(LedDriver, OutOfBoundsTurnOffDoesNoHarm)
     TEST_ASSERT_EQUAL_HEX16(0xffff, virtual_leds);
 }
 
-// Check RuntimeError
+// Check RuntimeError  TurnOn
 TEST(LedDriver, CheckErrorMessageOfOutOfBoubdsTurnOn)
 {
 	LedDriver_TurnOn(-1);
@@ -113,6 +114,7 @@ TEST(LedDriver, CheckErrorMessageOfOutOfBoubdsTurnOn)
     TEST_ASSERT_EQUAL(-1, RuntimeErrorStub_getLastParameter());
 }
 
+// Check RuntimeError  TurnOff
 TEST(LedDriver, CheckErrorMessageOfOutOfBoubdsTurnOff)
 {
     LedDriver_TurnAllOn();
@@ -121,7 +123,7 @@ TEST(LedDriver, CheckErrorMessageOfOutOfBoubdsTurnOff)
     TEST_ASSERT_EQUAL(-1, RuntimeErrorStub_getLastParameter());
 }
 
-// get led status
+// get led status is on?
 TEST(LedDriver, isOn)
 {
     TEST_ASSERT_FALSE(LedDriver_isOn(11));
@@ -129,9 +131,17 @@ TEST(LedDriver, isOn)
     TEST_ASSERT_TRUE(LedDriver_isOn(11));
 }
 
+// get led status is off?
+TEST(LedDriver, isOff)
+{
+    TEST_ASSERT_TRUE(LedDriver_isOff(1));
+}
+
+// Check RuntimeError isOn
 TEST(LedDriver, CheckErrorMessageOfOutOfBoubdsIsOn)
 {
 	LedDriver_isOn(17);
     TEST_ASSERT_EQUAL_STRING("LED Driver : out-of-bounds LED", RuntimeErrorStub_getLastError());
     TEST_ASSERT_EQUAL(-1, RuntimeErrorStub_getLastParameter());
 }
+

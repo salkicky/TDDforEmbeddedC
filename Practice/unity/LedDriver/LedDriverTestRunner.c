@@ -23,6 +23,7 @@ TEST_GROUP_RUNNER(LedDriver)
     RUN_TEST_CASE(LedDriver, CheckErrorMessageOfOutOfBoubdsTurnOff);
 
     RUN_TEST_CASE(LedDriver, isOn);
+    RUN_TEST_CASE(LedDriver, isOff);
     RUN_TEST_CASE(LedDriver, CheckErrorMessageOfOutOfBoubdsIsOn);
 }
 
