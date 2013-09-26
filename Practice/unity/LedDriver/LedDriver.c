@@ -21,6 +21,8 @@ static void   clearImageBit(int led_number);
 
 
 //-- PUBLIC ---------------------------------------
+
+////////////////////////////////////////////////
 // Create, and initialize LEDs
 void LedDriver_Create(UINT16 * address)
 {
@@ -30,6 +32,7 @@ void LedDriver_Create(UINT16 * address)
     updateLedHardware();
 }
 
+////////////////////////////////////////////////
 // TurnOn LED
 void LedDriver_TurnOn(int led_number)
 {
@@ -66,6 +69,7 @@ void LedDriver_TurnAllOff(void)
     updateLedHardware();
 }
 
+////////////////////////////////////////////////
 // return led on status
 BOOL LedDriver_isOn(int led_number)
 {

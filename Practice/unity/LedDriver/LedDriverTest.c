@@ -39,7 +39,7 @@ TEST(LedDriver, TurnOffLedOne)
     TEST_ASSERT_EQUAL_HEX16(0, virtual_leds); 
 }
 
-
+// turn on multiple Leds
 TEST(LedDriver, TurnOnMultipleLeds)
 {
     LedDriver_TurnOn(9);
@@ -48,6 +48,15 @@ TEST(LedDriver, TurnOnMultipleLeds)
 }
 
 
+// turn off multiple Leds
+TEST(LedDriver, TurnOffMultipleLeds)
+{
+    LedDriver_TurnAllOn();
+    LedDriver_TurnOff(9);
+    LedDriver_TurnOff(8);
+    TEST_ASSERT_EQUAL_HEX16( (UINT16)(~(0x0180)), virtual_leds);
+}
+
 TEST(LedDriver, TurnOffAnyLeds)
 {
     LedDriver_TurnAllOn();
@@ -55,7 +64,7 @@ TEST(LedDriver, TurnOffAnyLeds)
     TEST_ASSERT_EQUAL_HEX16(0xFF7F, virtual_leds);
 }
 
-
+// ALL ON/OFF
 TEST(LedDriver, AllOn)
 {
     LedDriver_TurnAllOn();
@@ -65,6 +74,7 @@ TEST(LedDriver, AllOn)
 
 TEST(LedDriver, AllOff)
 {
+    LedDriver_TurnAllOn();
     LedDriver_TurnAllOff();
     TEST_ASSERT_EQUAL_HEX16(0x0000, virtual_leds);
 }
@@ -154,11 +164,3 @@ TEST(LedDriver, OutOfBoundsLedsAreAlwaysOff)
     TEST_ASSERT_FALSE(LedDriver_isOn(17));
 }
 
-// turn off multiple Leds
-TEST(LedDriver, TurnOffMultipleLeds)
-{
-    LedDriver_TurnAllOn();
-    LedDriver_TurnOff(9);
-    LedDriver_TurnOff(8);
-    TEST_ASSERT_EQUAL_HEX16( (UINT16)(~(0x0180)), virtual_leds);
-}
