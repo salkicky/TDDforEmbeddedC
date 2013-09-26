@@ -145,3 +145,13 @@ TEST(LedDriver, CheckErrorMessageOfOutOfBoubdsIsOn)
     TEST_ASSERT_EQUAL(-1, RuntimeErrorStub_getLastParameter());
 }
 
+// Check OutOfBoundsLedsAreAlwaysOff
+TEST(LedDriver, OutOfBoundsLedsAreAlwaysOff)
+{
+    TEST_ASSERT_TRUE(LedDriver_isOff(0));
+    TEST_ASSERT_TRUE(LedDriver_isOff(17));
+    TEST_ASSERT_FALSE(LedDriver_isOn(0));
+    TEST_ASSERT_FALSE(LedDriver_isOn(17));
+}
+
+

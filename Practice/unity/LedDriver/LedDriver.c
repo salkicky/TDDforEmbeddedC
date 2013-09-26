@@ -83,15 +83,7 @@ BOOL LedDriver_isOn(int led_number)
 // return led off status
 BOOL LedDriver_isOff(int led_number)
 {
-    if (TRUE == isLedOutOfBounds(led_number)) {
-        return FALSE;
-    }
-
-    if (TRUE == LedDriver_isOn(led_number)) {
-        return FALSE;
-    } else {
-        return TRUE;
-    }
+    return !LedDriver_isOn(led_number);
 }
 
 //--- PRIVATE ------------------------------------------
