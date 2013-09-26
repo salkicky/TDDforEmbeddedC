@@ -154,4 +154,11 @@ TEST(LedDriver, OutOfBoundsLedsAreAlwaysOff)
     TEST_ASSERT_FALSE(LedDriver_isOn(17));
 }
 
-
+// turn off multiple Leds
+TEST(LedDriver, TurnOffMultipleLeds)
+{
+    LedDriver_TurnAllOn();
+    LedDriver_TurnOff(9);
+    LedDriver_TurnOff(8);
+    TEST_ASSERT_EQUAL_HEX16( (UINT16)(~(0x0180)), virtual_leds);
+}

@@ -26,5 +26,6 @@ TEST_GROUP_RUNNER(LedDriver)
     RUN_TEST_CASE(LedDriver, isOff);
     RUN_TEST_CASE(LedDriver, CheckErrorMessageOfOutOfBoubdsIsOn);
     RUN_TEST_CASE(LedDriver, OutOfBoundsLedsAreAlwaysOff);
+    RUN_TEST_CASE(LedDriver, TurnOffMultipleLeds);
 }
 
