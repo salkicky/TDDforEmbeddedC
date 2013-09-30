@@ -16,4 +16,6 @@ TEST_GROUP_RUNNER(CirculerBuffer)
 	RUN_TEST_CASE(CirculerBuffer, GetTwoData);
 	RUN_TEST_CASE(CirculerBuffer, BufferIsEmpty);
 	RUN_TEST_CASE(CirculerBuffer, BufferIsNotEmpty);
+	RUN_TEST_CASE(CirculerBuffer, NotDestroyMemoryArea);
+	RUN_TEST_CASE(CirculerBuffer, BufferOverRun);
 }
