@@ -40,7 +40,7 @@ void CirculerBuffer_create(int *buf, unsigned int buf_size)
 int CirculerBuffer_put(int data)
 {
     // バッファオーバーフローの確認
-    if (is_empty_flg == 0) {
+    if (is_empty_flg == NOT_EMPTY) {
         if (put_i == get_i) {
             return NG;
         }

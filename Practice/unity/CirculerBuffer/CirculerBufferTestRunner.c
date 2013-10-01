@@ -18,4 +18,5 @@ TEST_GROUP_RUNNER(CirculerBuffer)
 	RUN_TEST_CASE(CirculerBuffer, BufferIsNotEmpty);
 	RUN_TEST_CASE(CirculerBuffer, NotDestroyMemoryArea);
 	RUN_TEST_CASE(CirculerBuffer, BufferOverRun);
+	RUN_TEST_CASE(CirculerBuffer, UsualTest);
 }
