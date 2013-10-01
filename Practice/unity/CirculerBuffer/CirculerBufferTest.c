@@ -75,7 +75,7 @@ TEST(CirculerBuffer, BufferIsNotEmpty)
 	TEST_ASSERT_FALSE(CirculerBuffer_isEmpty());
 }
 
-// in, in, out, in
+// バッファサイズよりも大きい回数分、putを行った場合の動作（バッファ溢れ無し） 
 TEST(CirculerBuffer, NotDestroyMemoryArea)
 {
 	int buf[3] = {-1, -1, -1};
