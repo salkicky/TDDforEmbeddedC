@@ -3,6 +3,8 @@
 
 int buffer[100];
 
+void get_number(const char *mess, int *num);
+
 int main(void)
 {
     char buf[80];
@@ -13,15 +15,9 @@ int main(void)
     CirculerBuffer_create(buffer, 30);
 
     while(1) {
-        printf("Please input command > ");
-        fflush(stdout);
-        fgets(buf, sizeof(buf), stdin);
-        sscanf(buf, "%d", &command);
+        get_number("Please input command > ", &command);
         if (command == 0) {
-            printf("Please input data > ");
-            fflush(stdout);
-            fgets(buf, sizeof(buf), stdin);
-            sscanf(buf, "%d", &input_num);
+            get_number("Please input data > ", &input_num);
 
             CirculerBuffer_put(input_num);
         } else {
@@ -34,4 +30,12 @@ int main(void)
 	return 0;
 }
     
+void get_number(const char *mess, int *num)
+{
+    char buf[80];
 
+    printf(mess);
+    fflush(stdout);
+    fgets(buf, sizeof(buf), stdin);
+    sscanf(buf, "%d", num);
+}
