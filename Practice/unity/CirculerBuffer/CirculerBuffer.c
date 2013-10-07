@@ -5,11 +5,15 @@
  *******************************************************/
 #include "CirculerBuffer.h"
 
-static int *g_buf;                  // バッファ記憶用ポインタ
-static unsigned int i_max;          // バッファインデックス最大値
-static unsigned int put_i;          // データ登録用インデックス
-static unsigned int get_i;          // データ取り出し用インデックス
-static int is_empty_flg;            // データ空フラグ
+struct CirculerBuffer_ContextTag {
+    int *buf;                       // バッファ記憶用ポインタ 
+    unsigned int buf_size;          // バッファサイズ
+    unsigned int wp;                // データ書き込み用インデックス
+    unsigned int rp;                // データ読み出し用インデックス
+    int is_empty_flg;               // データ空フラグ
+};
+
+static  struct CirculerBuffer_ContextTag context;
 
 /************************************************
  * FIFOを生成する
@@ -23,12 +27,11 @@ static int is_empty_flg;            // データ空フラグ
  ************************************************/
 void CirculerBuffer_create(int *buf, unsigned int buf_size)
 {
-	g_buf = buf;
-	i_max = buf_size - 1;
-
-	put_i = 0;
-	get_i = 0;
-    is_empty_flg = EMPTY;
+    context.buf = buf;
+    context.buf_size = buf_size;
+    context.wp = 0;
+    context.rp = 0;
+    context.is_empty_flg = EMPTY;
 }
 
 /************************************************
@@ -40,21 +43,21 @@ void CirculerBuffer_create(int *buf, unsigned int buf_size)
 int CirculerBuffer_put(int data)
 {
     // バッファオーバーフローの確認
-    if (is_empty_flg == NOT_EMPTY) {
-        if (put_i == get_i) {
+    if (context.is_empty_flg == NOT_EMPTY) {
+        if (context.wp == context.rp) {
             return NG;
         }
     }
 
     // データの登録
-	g_buf[put_i] = data;
-    is_empty_flg = NOT_EMPTY;
+	context.buf[context.wp] = data;
+    context.is_empty_flg = NOT_EMPTY;
 
     // データ登録用インデックスの更新
-    if (put_i == i_max) {
-        put_i = 0;
+    if (context.wp == (context.buf_size - 1)) {
+        context.wp = 0;
     } else {
-        put_i++;
+        context.wp++;
     }
 
 	return OK;
@@ -74,18 +77,18 @@ int CirculerBuffer_get(void)
 	int data;
 
     // データ取り出し
-	data = g_buf[get_i];
+	data = context.buf[context.rp];
 
     // データ取り出し用インデックスの更新
-    if (get_i == i_max) {
-        get_i = 0;
+    if (context.rp == (context.buf_size - 1)) {
+        context.rp = 0;
     } else {
-        get_i++;
+        context.rp++;
     }
 
-    if (get_i == put_i) {
+    if (context.rp == context.wp) {
         // 取り出すデータが無くなったので空フラグを更新
-        is_empty_flg = EMPTY;
+        context.is_empty_flg = EMPTY;
     }
 
 	return data;
@@ -98,5 +101,5 @@ int CirculerBuffer_get(void)
  ************************************************/
 int CirculerBuffer_isEmpty(void)
 {
-	return is_empty_flg;
+	return context.is_empty_flg;
 }
