@@ -66,18 +66,17 @@ int CirculerBuffer_put(int data)
 /************************************************
  * FIFOからデータを取り出す
  *
- * [out] data : FIFOから取り出したデータ
+ * [in] *data : FIFOから取り出したデータ
+ * [out] 取り出し結果（OK:成功、NG:失敗）
  *
  * 制限事項
  *      FIFOからデータを取り出す場合には、必ず
  *      空でないことを確認すること。
  ************************************************/
-int CirculerBuffer_get(void)
+int CirculerBuffer_get(int *data)
 {
-	int data;
-
     // データ取り出し
-	data = context.buf[context.rp];
+	*data = context.buf[context.rp];
 
     // データ取り出し用インデックスの更新
 	context.size--;
@@ -87,7 +86,7 @@ int CirculerBuffer_get(void)
         context.rp++;
     }
 
-	return data;
+	return OK;
 }
 
 /************************************************

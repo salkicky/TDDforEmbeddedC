@@ -45,8 +45,11 @@ TEST(CirculerBuffer, PutOneData2)
 // FIFOからデータを１つ取り出す
 TEST(CirculerBuffer, GetOneData)
 {
+	int data;
+
 	CirculerBuffer_put(1);
-	TEST_ASSERT_EQUAL_INT(1, CirculerBuffer_get());
+	CirculerBuffer_get(&data);
+	TEST_ASSERT_EQUAL_INT(1, data);
 }
 
 // FIFOへデータを２つ登録する。
@@ -61,10 +64,16 @@ TEST(CirculerBuffer, PutTwoData)
 // FIFOへデータを２つ登録し、２つ取り出す
 TEST(CirculerBuffer, GetTwoData)
 {
+	int data;
+
 	CirculerBuffer_put(1);
 	CirculerBuffer_put(2);
-	TEST_ASSERT_EQUAL_INT(1, CirculerBuffer_get());
-	TEST_ASSERT_EQUAL_INT(2, CirculerBuffer_get());
+
+	CirculerBuffer_get(&data);
+	TEST_ASSERT_EQUAL_INT(1, data);
+	
+	CirculerBuffer_get(&data);
+	TEST_ASSERT_EQUAL_INT(2, data);
 }
 
 // 空であるかどうかを確認する
@@ -84,14 +93,19 @@ TEST(CirculerBuffer, BufferIsNotEmpty)
 TEST(CirculerBuffer, NotDestroyMemoryArea)
 {
 	int buf[3] = {-1, -1, -1};
+	int data;
+
 	CirculerBuffer_create(buf, 2);
 
 	CirculerBuffer_put(1);
 	CirculerBuffer_put(2);
-	TEST_ASSERT_EQUAL_INT(1, CirculerBuffer_get());
+	CirculerBuffer_get(&data);
+	TEST_ASSERT_EQUAL_INT(1, data);
 	CirculerBuffer_put(3);
-	TEST_ASSERT_EQUAL_INT(2, CirculerBuffer_get());
-	TEST_ASSERT_EQUAL_INT(3, CirculerBuffer_get());
+	CirculerBuffer_get(&data);
+	TEST_ASSERT_EQUAL_INT(2, data);
+	CirculerBuffer_get(&data);
+	TEST_ASSERT_EQUAL_INT(3, data);
 	TEST_ASSERT_EQUAL_INT(-1, buf[2]);
 }
 
@@ -108,16 +122,23 @@ TEST(CirculerBuffer, BufferOverRun)
 
 TEST(CirculerBuffer, UsualTest)
 {
+	int data;
+
 	TEST_ASSERT_EQUAL_INT(OK, CirculerBuffer_put(1));
 	TEST_ASSERT_EQUAL_INT(OK, CirculerBuffer_put(2));
 	TEST_ASSERT_EQUAL_INT(OK, CirculerBuffer_put(3));
-	TEST_ASSERT_EQUAL_INT(1, CirculerBuffer_get());
+	CirculerBuffer_get(&data);
+	TEST_ASSERT_EQUAL_INT(1, data);
 	TEST_ASSERT_EQUAL_INT(OK, CirculerBuffer_put(4));
 	TEST_ASSERT_EQUAL_INT(OK, CirculerBuffer_put(-2));
-	TEST_ASSERT_EQUAL_INT(2, CirculerBuffer_get());
+	CirculerBuffer_get(&data);
+	TEST_ASSERT_EQUAL_INT(2, data);
 	TEST_ASSERT_EQUAL_INT(OK, CirculerBuffer_put(6));
 	TEST_ASSERT_EQUAL_INT(OK, CirculerBuffer_put(-1));
-	TEST_ASSERT_EQUAL_INT(3, CirculerBuffer_get());
-	TEST_ASSERT_EQUAL_INT(4, CirculerBuffer_get());
-	TEST_ASSERT_EQUAL_INT(-2, CirculerBuffer_get());
+	CirculerBuffer_get(&data);
+	TEST_ASSERT_EQUAL_INT(3, data);
+	CirculerBuffer_get(&data);
+	TEST_ASSERT_EQUAL_INT(4, data);
+	CirculerBuffer_get(&data);
+	TEST_ASSERT_EQUAL_INT(-2, data);
 }
