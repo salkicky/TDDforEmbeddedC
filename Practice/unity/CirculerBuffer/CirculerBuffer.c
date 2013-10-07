@@ -10,7 +10,7 @@ struct CirculerBuffer_ContextTag {
     unsigned int buf_size;          // バッファサイズ
     unsigned int wp;                // データ書き込み用インデックス
     unsigned int rp;                // データ読み出し用インデックス
-    int is_empty_flg;               // データ空フラグ
+    int size;
 };
 
 static  struct CirculerBuffer_ContextTag context;
@@ -31,7 +31,7 @@ void CirculerBuffer_create(int *buf, unsigned int buf_size)
     context.buf_size = buf_size;
     context.wp = 0;
     context.rp = 0;
-    context.is_empty_flg = EMPTY;
+    context.size = 0;
 }
 
 /************************************************
@@ -43,7 +43,7 @@ void CirculerBuffer_create(int *buf, unsigned int buf_size)
 int CirculerBuffer_put(int data)
 {
     // バッファオーバーフローの確認
-    if (context.is_empty_flg == NOT_EMPTY) {
+    if (context.size == context.buf_size) {
         if (context.wp == context.rp) {
             return NG;
         }
@@ -51,9 +51,9 @@ int CirculerBuffer_put(int data)
 
     // データの登録
 	context.buf[context.wp] = data;
-    context.is_empty_flg = NOT_EMPTY;
 
     // データ登録用インデックスの更新
+    context.size++;
     if (context.wp == (context.buf_size - 1)) {
         context.wp = 0;
     } else {
@@ -80,15 +80,11 @@ int CirculerBuffer_get(void)
 	data = context.buf[context.rp];
 
     // データ取り出し用インデックスの更新
+	context.size--;
     if (context.rp == (context.buf_size - 1)) {
         context.rp = 0;
     } else {
         context.rp++;
-    }
-
-    if (context.rp == context.wp) {
-        // 取り出すデータが無くなったので空フラグを更新
-        context.is_empty_flg = EMPTY;
     }
 
 	return data;
@@ -101,5 +97,5 @@ int CirculerBuffer_get(void)
  ************************************************/
 int CirculerBuffer_isEmpty(void)
 {
-	return context.is_empty_flg;
+	return context.size ? NOT_EMPTY : EMPTY;
 }
