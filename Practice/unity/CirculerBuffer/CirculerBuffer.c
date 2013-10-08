@@ -21,6 +21,7 @@ static  struct CirculerBuffer_ContextTag *contextp;
 void CirculerBuffer_create(struct CirculerBuffer_ContextTag *context, int *buf, unsigned int buf_size)
 {
 	contextp = context;
+
     contextp->buf = buf;
     contextp->buf_size = buf_size;
     contextp->wp = 0;
