@@ -75,6 +75,10 @@ int CirculerBuffer_put(int data)
  ************************************************/
 int CirculerBuffer_get(int *data)
 {
+	if (context.size == 0) {
+		return NG;
+	}
+
     // データ取り出し
 	*data = context.buf[context.rp];
 

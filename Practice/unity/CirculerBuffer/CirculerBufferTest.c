@@ -115,6 +115,17 @@ TEST(CirculerBuffer, BufferOverRun)
 	TEST_ASSERT_EQUAL_INT(NG, CirculerBuffer_put(3));
 }
 
+// 登録データ数以上にデータを取り出そうとした場合の動作
+TEST(CirculerBuffer, GetFromEmptyBuffer)
+{
+	int data;
+
+	TEST_ASSERT_EQUAL_INT(OK, CirculerBuffer_put(1));
+	get_data_expected_as(1);
+
+	TEST_ASSERT_EQUAL_INT(NG, CirculerBuffer_get(&data));
+}
+
 TEST(CirculerBuffer, UsualTest)
 {
 	TEST_ASSERT_EQUAL_INT(OK, CirculerBuffer_put(1));
