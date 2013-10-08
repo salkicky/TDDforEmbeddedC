@@ -11,6 +11,7 @@
 
 #define BUF_MAX_SIZE  100
 int buffer[BUF_MAX_SIZE];
+struct CirculerBuffer_ContextTag context;
 
 void get_data_expected_as(int expected_data)
 {
@@ -20,13 +21,13 @@ void get_data_expected_as(int expected_data)
 	TEST_ASSERT_EQUAL_INT(expected_data, data);
 }
 
-
+//////////////////////////////////////////////////
 TEST_GROUP(CirculerBuffer);
 
 /* set up */
 TEST_SETUP(CirculerBuffer)
 {
-	CirculerBuffer_create(buffer, BUF_MAX_SIZE);
+	CirculerBuffer_create(&context, buffer, BUF_MAX_SIZE);
 }
 
 /* tear down */
@@ -93,7 +94,7 @@ TEST(CirculerBuffer, BufferIsNotEmpty)
 TEST(CirculerBuffer, NotDestroyMemoryArea)
 {
 	int buf[3] = {-1, -1, -1};
-	CirculerBuffer_create(buf, 2);
+	CirculerBuffer_create(&context, buf, 2);
 
 	CirculerBuffer_put(1);
 	CirculerBuffer_put(2);
@@ -108,7 +109,7 @@ TEST(CirculerBuffer, NotDestroyMemoryArea)
 TEST(CirculerBuffer, BufferOverRun)
 {
 	int buf[3] = {-1, -1 -1};
-	CirculerBuffer_create(buf, 2);
+	CirculerBuffer_create(&context, buf, 2);
 
 	TEST_ASSERT_EQUAL_INT(OK, CirculerBuffer_put(1));
 	TEST_ASSERT_EQUAL_INT(OK, CirculerBuffer_put(2));

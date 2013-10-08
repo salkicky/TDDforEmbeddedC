@@ -6,15 +6,21 @@
 #ifndef CIRCULER_BUFFER_H
 #define CIRCULER_BUFFER_H
 
-#define EMPTY       1
-#define NOT_EMPTY   0
-
 #define OK          0
 #define NG         -1
+
+struct CirculerBuffer_ContextTag {
+    int *buf;           // バッファ記憶用ポインタ 
+    int buf_size;       // バッファサイズ
+    int wp;             // データ書き込み用インデックス
+    int rp;             // データ読み出し用インデックス
+    int size;
+};
 
 /************************************************
  * FIFOを生成する
  *
+ * [in] context : 管理用エリアへのポインタ
  * [in] buf : int型配列のバッファへのポインタ
  * [in] buf_size : バッファサイズ
  * 
@@ -22,7 +28,7 @@
  *      bufが指すバッファ領域は、FIFOバッファを利用中は解放しないこと。
  *      buf_size は1以上を指定すること。
  ************************************************/
-void CirculerBuffer_create(int *buf, unsigned int buf_size);
+void CirculerBuffer_create(struct CirculerBuffer_ContextTag *context, int *buf, unsigned int buf_size);
 
 /************************************************
  * FIFOへデータを登録する
@@ -45,9 +51,9 @@ int CirculerBuffer_put(int data);
 int CirculerBuffer_get(int *data);
 
 /************************************************
- * FIFOが空かどうかを返す
+ * FIFOの登録可能データサイズを返す
  *
- * [out] : バッファ状態（EMPTY:空、NOT_EMPTY:データあり）
+ * [out] : 登録可能データサイズ
  ************************************************/
 int CirculerBuffer_getCapacity(void);
 

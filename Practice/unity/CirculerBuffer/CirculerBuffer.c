@@ -5,19 +5,12 @@
  *******************************************************/
 #include "CirculerBuffer.h"
 
-struct CirculerBuffer_ContextTag {
-    int *buf;                       // バッファ記憶用ポインタ 
-    unsigned int buf_size;          // バッファサイズ
-    unsigned int wp;                // データ書き込み用インデックス
-    unsigned int rp;                // データ読み出し用インデックス
-    int size;
-};
-
-static  struct CirculerBuffer_ContextTag context;
+static  struct CirculerBuffer_ContextTag *contextp;
 
 /************************************************
  * FIFOを生成する
  *
+ * [in] context : 管理用エリアへのポインタ
  * [in] buf : int型配列のバッファへのポインタ
  * [in] buf_size : バッファサイズ
  * 
@@ -25,13 +18,14 @@ static  struct CirculerBuffer_ContextTag context;
  *      bufが指すバッファ領域は、FIFOバッファを利用中は解放しないこと。
  *      buf_size は1以上を指定すること。
  ************************************************/
-void CirculerBuffer_create(int *buf, unsigned int buf_size)
+void CirculerBuffer_create(struct CirculerBuffer_ContextTag *context, int *buf, unsigned int buf_size)
 {
-    context.buf = buf;
-    context.buf_size = buf_size;
-    context.wp = 0;
-    context.rp = 0;
-    context.size = 0;
+	contextp = context;
+    contextp->buf = buf;
+    contextp->buf_size = buf_size;
+    contextp->wp = 0;
+    contextp->rp = 0;
+    contextp->size = 0;
 }
 
 /************************************************
@@ -43,21 +37,19 @@ void CirculerBuffer_create(int *buf, unsigned int buf_size)
 int CirculerBuffer_put(int data)
 {
     // バッファオーバーフローの確認
-    if (context.size == context.buf_size) {
-        if (context.wp == context.rp) {
-            return NG;
-        }
+    if (contextp->size == contextp->buf_size) {
+		return NG;
     }
 
     // データの登録
-	context.buf[context.wp] = data;
+	contextp->buf[contextp->wp] = data;
 
     // データ登録用インデックスの更新
-    context.size++;
-    if (context.wp == (context.buf_size - 1)) {
-        context.wp = 0;
+    contextp->size++;
+    if (contextp->wp == (contextp->buf_size - 1)) {
+        contextp->wp = 0;
     } else {
-        context.wp++;
+        contextp->wp++;
     }
 
 	return OK;
@@ -75,19 +67,19 @@ int CirculerBuffer_put(int data)
  ************************************************/
 int CirculerBuffer_get(int *data)
 {
-	if (context.size == 0) {
+	if (contextp->size == 0) {
 		return NG;
 	}
 
     // データ取り出し
-	*data = context.buf[context.rp];
+	*data = contextp->buf[contextp->rp];
 
     // データ取り出し用インデックスの更新
-	context.size--;
-    if (context.rp == (context.buf_size - 1)) {
-        context.rp = 0;
+	contextp->size--;
+    if (contextp->rp == (contextp->buf_size - 1)) {
+        contextp->rp = 0;
     } else {
-        context.rp++;
+        contextp->rp++;
     }
 
 	return OK;
@@ -100,5 +92,5 @@ int CirculerBuffer_get(int *data)
  ************************************************/
 int CirculerBuffer_getCapacity(void)
 {
-	return (context.buf_size - context.size);
+	return (contextp->buf_size - contextp->size);
 }
