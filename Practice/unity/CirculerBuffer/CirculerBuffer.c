@@ -94,11 +94,11 @@ int CirculerBuffer_get(int *data)
 }
 
 /************************************************
- * FIFOが空かどうかを返す
+ * FIFOの登録可能データサイズを返す
  *
- * [out] : バッファ状態（EMPTY:空、NOT_EMPTY:データあり）
+ * [out] : 登録可能データサイズ
  ************************************************/
-int CirculerBuffer_isEmpty(void)
+int CirculerBuffer_getCapacity(void)
 {
-	return context.size ? NOT_EMPTY : EMPTY;
+	return (context.buf_size - context.size);
 }

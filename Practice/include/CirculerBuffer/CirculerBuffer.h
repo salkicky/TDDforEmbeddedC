@@ -49,7 +49,7 @@ int CirculerBuffer_get(int *data);
  *
  * [out] : バッファ状態（EMPTY:空、NOT_EMPTY:データあり）
  ************************************************/
-int CirculerBuffer_isEmpty(void);
+int CirculerBuffer_getCapacity(void);
 
 
 #endif  /* CIRCULER_BUFFER_H */

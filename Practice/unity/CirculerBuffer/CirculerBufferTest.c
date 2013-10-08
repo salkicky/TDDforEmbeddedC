@@ -79,14 +79,14 @@ TEST(CirculerBuffer, GetTwoData)
 // 空であるかどうかを確認する
 TEST(CirculerBuffer, BufferIsEmpty)
 {
-	TEST_ASSERT_TRUE(EMPTY == CirculerBuffer_isEmpty());
+	TEST_ASSERT_EQUAL_INT(BUF_MAX_SIZE, CirculerBuffer_getCapacity());
 }
 
 // 空でないことを確認する
 TEST(CirculerBuffer, BufferIsNotEmpty) 
 {
 	CirculerBuffer_put(1);
-	TEST_ASSERT_FALSE(CirculerBuffer_isEmpty());
+	TEST_ASSERT_EQUAL_INT(BUF_MAX_SIZE - 1, CirculerBuffer_getCapacity());
 }
 
 // バッファサイズよりも大きい回数分、putを行った場合の動作（バッファ溢れ無し） 
