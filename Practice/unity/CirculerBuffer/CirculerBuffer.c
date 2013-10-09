@@ -5,7 +5,7 @@
  *******************************************************/
 #include "CirculerBuffer.h"
 
-static  struct CirculerBuffer_ContextTag *contextp;
+static  struct CirculerBuffer_ContextTag *cp;
 
 /************************************************
  * FIFOを生成する
@@ -20,13 +20,13 @@ static  struct CirculerBuffer_ContextTag *contextp;
  ************************************************/
 void CirculerBuffer_create(struct CirculerBuffer_ContextTag *context, int *buf, unsigned int buf_size)
 {
-	contextp = context;
+	cp = context;
 
-    contextp->buf = buf;
-    contextp->buf_size = buf_size;
-    contextp->wp = 0;
-    contextp->rp = 0;
-    contextp->size = 0;
+    cp->buf = buf;
+    cp->buf_size = buf_size;
+    cp->wp = 0;
+    cp->rp = 0;
+    cp->size = 0;
 }
 
 /************************************************
@@ -38,19 +38,19 @@ void CirculerBuffer_create(struct CirculerBuffer_ContextTag *context, int *buf, 
 int CirculerBuffer_put(int data)
 {
     // バッファオーバーフローの確認
-    if (contextp->size == contextp->buf_size) {
+    if (cp->size == cp->buf_size) {
 		return NG;
     }
 
     // データの登録
-	contextp->buf[contextp->wp] = data;
+	cp->buf[cp->wp] = data;
 
     // データ登録用インデックスの更新
-    contextp->size++;
-    if (contextp->wp == (contextp->buf_size - 1)) {
-        contextp->wp = 0;
+    cp->size++;
+    if (cp->wp == (cp->buf_size - 1)) {
+        cp->wp = 0;
     } else {
-        contextp->wp++;
+        cp->wp++;
     }
 
 	return OK;
@@ -68,19 +68,19 @@ int CirculerBuffer_put(int data)
  ************************************************/
 int CirculerBuffer_get(int *data)
 {
-	if (contextp->size == 0) {
+	if (cp->size == 0) {
 		return NG;
 	}
 
     // データ取り出し
-	*data = contextp->buf[contextp->rp];
+	*data = cp->buf[cp->rp];
 
     // データ取り出し用インデックスの更新
-	contextp->size--;
-    if (contextp->rp == (contextp->buf_size - 1)) {
-        contextp->rp = 0;
+	cp->size--;
+    if (cp->rp == (cp->buf_size - 1)) {
+        cp->rp = 0;
     } else {
-        contextp->rp++;
+        cp->rp++;
     }
 
 	return OK;
@@ -93,5 +93,5 @@ int CirculerBuffer_get(int *data)
  ************************************************/
 int CirculerBuffer_getCapacity(void)
 {
-	return (contextp->buf_size - contextp->size);
+	return (cp->buf_size - cp->size);
 }
