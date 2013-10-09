@@ -15,6 +15,7 @@ CPP_PLATFORM = gcc
 PROJECT_HOME_DIR = .
 
 SRC_DIRS = \
+	$(PROJECT_HOME_DIR)/src \
 	$(PROJECT_HOME_DIR)/src/CpputestSample \
 	$(PROJECT_HOME_DIR)/src/HomeAutomation \
 
