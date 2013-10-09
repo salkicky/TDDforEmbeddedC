@@ -15,16 +15,17 @@ CPP_PLATFORM = gcc
 PROJECT_HOME_DIR = .
 
 SRC_DIRS = \
-	. \
 	$(PROJECT_HOME_DIR)/src/CpputestSample \
+	$(PROJECT_HOME_DIR)/src/HomeAutomation \
 
 TEST_SRC_DIRS = \
-	.\
 	$(PROJECT_HOME_DIR)/src/CpputestSample \
+	$(PROJECT_HOME_DIR)/tests/HomeAutomation \
 	
 INCLUDE_DIRS =\
-  .\
+  $(PROJECT_HOME_DIR)/src \
   $(PROJECT_HOME_DIR)/src/CpputestSample \
+  $(PROJECT_HOME_DIR)/include/HomeAutomation \
   $(CPPUTEST_HOME)/include\
 
 MOCKS_SRC_DIRS = \
