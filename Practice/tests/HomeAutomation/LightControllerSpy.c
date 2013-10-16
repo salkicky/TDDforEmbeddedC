@@ -1,16 +1,26 @@
 #include "LightControllerSpy.h"
 
-static long state;
-static long id;
+static int _last_state;
+static int _id;
 
-long LightControllerSpy_getLastId(void)
+void LightController_Create(void)
 {
-	return id;	
+    _id = LIGHT_ID_UNKNOWN;
+    _last_state = LIGHT_STATE_UNKNOWN;
 }
 
-long LightControllerSpy_getState(void)
+void LightController_Destroy(void)
 {
-	return state;
+}
+
+int LightControllerSpy_getLastId(void)
+{
+	return _id;	
+}
+
+int LightControllerSpy_getState(void)
+{
+	return _last_state;
 }
 
 

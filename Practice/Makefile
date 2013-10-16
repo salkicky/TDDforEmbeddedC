@@ -1,4 +1,5 @@
-All: cpp unity
+# All: cpp unity
+All: cpp
 
 clean: cleanCppUTest cleanUnity
 

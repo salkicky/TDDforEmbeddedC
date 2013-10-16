@@ -17,7 +17,7 @@ enum {
 		LIGHT_ID_UNKNOWN = -1
 };
 
-long LightControllerSpy_getLastId(void);
-long LightControllerSpy_getState(void);
+int LightControllerSpy_getLastId(void);
+int LightControllerSpy_getState(void);
 
 #endif  /* D_FakeLightControllerSpy_H */

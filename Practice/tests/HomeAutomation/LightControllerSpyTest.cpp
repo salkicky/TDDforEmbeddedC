@@ -20,7 +20,7 @@ TEST_GROUP(LightControllerSpy)
 
 TEST(LightControllerSpy, Create)
 {
-	LONGS_EQUAL(LIGHT_ID_UNKNOWN, LightControllerSpy_getLastId());
-	LONGS_EQUAL(LIGHT_STATE_UNKNOWN, LightControllerSpy_getState());
+	CHECK_EQUAL(LIGHT_ID_UNKNOWN, LightControllerSpy_getLastId());
+	CHECK_EQUAL(LIGHT_STATE_UNKNOWN, LightControllerSpy_getState());
 }
 
