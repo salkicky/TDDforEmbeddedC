@@ -20,6 +20,10 @@ TEST_GROUP(FakeTimeService)
 
 TEST(FakeTimeService, Create)
 {
-  FAIL("Start here");
+	Time time;
+	
+	TimeService_getTime(&time);
+	LONGS_EQUAL(TIME_UNKNOWN, time.minute_of_day);
+	LONGS_EQUAL(TIME_UNKNOWN, time.day_of_year);
 }
 

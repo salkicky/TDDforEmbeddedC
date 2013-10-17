@@ -7,7 +7,15 @@
  *
  **********************************************************/
 
+typedef struct {
+	long	minute_of_day;
+	long	day_of_year;
+} Time;
+	
+
 void TimeService_Create(void);
 void TimeService_Destroy(void);
+
+void TimeService_getTime(Time *time);
 
 #endif  /* D_FakeTimeService_H */

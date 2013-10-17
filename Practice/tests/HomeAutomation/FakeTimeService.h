@@ -9,6 +9,10 @@
 
 #include "TimeService.h"
 
+enum {
+	TIME_UNKNOWN
+};
+
 void FakeTimeService_Create(void);
 void FakeTimeService_Destroy(void);
 

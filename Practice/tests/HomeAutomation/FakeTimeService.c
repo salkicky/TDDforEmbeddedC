@@ -8,4 +8,7 @@ void TimeService_Destroy(void)
 {
 }
 
+void TimeService_getTime(Time *time)
+{
+}
 
