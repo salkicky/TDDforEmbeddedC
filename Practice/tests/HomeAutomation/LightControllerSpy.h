@@ -10,13 +10,13 @@
  **********************************************************/
 
 enum {
-		LIGHT_STATE_UNKNOWN = -1,
-        LIGHT_ON,
-        LIGHT_OFF
+	LIGHT_STATE_UNKNOWN = -1,
+    LIGHT_ON,
+	LIGHT_OFF
 };
 
 enum {
-		LIGHT_ID_UNKNOWN = -1
+	LIGHT_ID_UNKNOWN = -1
 };
 
 int LightControllerSpy_getLastId(void);
