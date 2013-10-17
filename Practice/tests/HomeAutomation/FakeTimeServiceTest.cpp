@@ -21,9 +21,18 @@ TEST_GROUP(FakeTimeService)
 TEST(FakeTimeService, Create)
 {
 	Time time;
-	
 	TimeService_getTime(&time);
 	LONGS_EQUAL(TIME_UNKNOWN, time.minute_of_day);
 	LONGS_EQUAL(TIME_UNKNOWN, time.day_of_year);
+}
+
+TEST(FakeTimeService, Set)
+{
+	Time time;
+	FakeTimeService_setMinute(42);
+	FakeTimeService_setDay(SATURDAY);
+	TimeService_getTime(&time);
+	LONGS_EQUAL(42, time.minute_of_day);
+	LONGS_EQUAL(SATURDAY, time.day_of_year);
 }
 

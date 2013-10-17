@@ -13,7 +13,16 @@ enum {
 	TIME_UNKNOWN
 };
 
+enum WEEK_DAY {
+	SUNDAY, MONDAY, TUESDAY, WEDNSDAY, THURSDAY, FRYDAY, SATURDAY
+};
+
+/*
 void FakeTimeService_Create(void);
 void FakeTimeService_Destroy(void);
+*/
+
+void FakeTimeService_setMinute(long minute);
+void FakeTimeService_setDay(enum WEEK_DAY day);
 
 #endif  /* D_FakeTimeService_H */
