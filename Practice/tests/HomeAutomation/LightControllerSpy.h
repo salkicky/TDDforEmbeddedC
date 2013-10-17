@@ -11,8 +11,8 @@
 
 enum {
 		LIGHT_STATE_UNKNOWN = -1,
-        LIGHT_STATE_TURN_ON,
-        LIGHT_STATE_TURN_OFF
+        LIGHT_ON,
+        LIGHT_OFF
 };
 
 enum {
