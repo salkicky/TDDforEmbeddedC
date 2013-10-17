@@ -1,11 +1,11 @@
 extern "C"
 {
-#include "TimeServiceSpy.h"
+#include "FakeTimeService.h"
 }
 
 #include "CppUTest/TestHarness.h"
 
-TEST_GROUP(TimeServiceSpy)
+TEST_GROUP(FakeTimeService)
 {
     void setup()
     {
@@ -18,7 +18,7 @@ TEST_GROUP(TimeServiceSpy)
     }
 };
 
-TEST(TimeServiceSpy, Create)
+TEST(FakeTimeService, Create)
 {
   FAIL("Start here");
 }

@@ -1,4 +1,4 @@
-#include "TimeServiceSpy.h"
+#include "FakeTimeService.h"
 
 void TimeService_Create(void)
 {
