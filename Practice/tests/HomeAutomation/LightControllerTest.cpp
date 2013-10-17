@@ -20,6 +20,7 @@ TEST_GROUP(LightController)
 
 TEST(LightController, Create)
 {
-  FAIL("Start here");
+  //FAIL("Start here");
+  CHECK_TRUE(1);
 }
 

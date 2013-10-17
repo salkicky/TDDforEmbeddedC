@@ -7,6 +7,9 @@
  *
  **********************************************************/
 
+#include "LightController.h"
+#include "TimeService.h"
+
 void LightScheduler_Create(void);
 void LightScheduler_Destroy(void);
 

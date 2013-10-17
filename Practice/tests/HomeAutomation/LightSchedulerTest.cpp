@@ -1,6 +1,8 @@
 extern "C"
 {
 #include "LightScheduler.h"
+#include "LightControllerSpy.h"
+#include "FakeTimeService.h"
 }
 
 #include "CppUTest/TestHarness.h"
@@ -40,4 +42,11 @@ TEST(LightScheduler, NoChangeToLightsDuringInitialization)
 {
 	//LONG_EQUAL(LIGHT_ID_UNKNOWN, LightControllerSpy_getLastId());
 	//LONG_EQUAL(LIGHT_STATE_UNKNOWN, LightControllerSpy_getState());
+}
+
+TEST(LightScheduler, NoScheduleNothingHappens)
+{
+	FakeTimeService_setDay(MONDAY);
+	FakeTimeService_setMinute(42);
+	CHECK_EQUAL(LIGHT_STATE_UNKNOWN, LightControllerSpy_getState());
 }
