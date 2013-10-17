@@ -13,4 +13,6 @@
 void LightScheduler_Create(void);
 void LightScheduler_Destroy(void);
 
+void LightScheduler_wakeup(void);
+
 #endif  /* D_FakeLightScheduler_H */

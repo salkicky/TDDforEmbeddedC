@@ -11,12 +11,16 @@ TEST_GROUP(LightScheduler)
 {
     void setup()
     {
-      LightScheduler_Create();
+		TimeService_Create();
+		LightController_Create();
+		LightScheduler_Create();
     }
 
     void teardown()
     {
        LightScheduler_Destroy();
+	   LightController_Destroy();
+	   TimeService_Destroy();
     }
 };
 
@@ -44,9 +48,12 @@ TEST(LightScheduler, NoChangeToLightsDuringInitialization)
 	//LONG_EQUAL(LIGHT_STATE_UNKNOWN, LightControllerSpy_getState());
 }
 
+// [TEST] If there is no schedule, no event will be happend.
 TEST(LightScheduler, NoScheduleNothingHappens)
 {
 	FakeTimeService_setDay(MONDAY);
 	FakeTimeService_setMinute(42);
+	LightScheduler_wakeup();
 	CHECK_EQUAL(LIGHT_STATE_UNKNOWN, LightControllerSpy_getState());
+	CHECK_EQUAL(LIGHT_STATE_UNKNOWN, LightControllerSpy_getLastId());
 }
