@@ -23,7 +23,7 @@ TEST(FakeTimeService, Create)
 	Time time;
 	TimeService_getTime(&time);
 	LONGS_EQUAL(TIME_UNKNOWN, time.minute_of_day);
-	LONGS_EQUAL(TIME_UNKNOWN, time.day_of_year);
+	LONGS_EQUAL(TIME_UNKNOWN, time.day_of_week);
 }
 
 TEST(FakeTimeService, Set)
@@ -33,6 +33,6 @@ TEST(FakeTimeService, Set)
 	FakeTimeService_setDay(SATURDAY);
 	TimeService_getTime(&time);
 	LONGS_EQUAL(42, time.minute_of_day);
-	LONGS_EQUAL(SATURDAY, time.day_of_year);
+	LONGS_EQUAL(SATURDAY, time.day_of_week);
 }
 

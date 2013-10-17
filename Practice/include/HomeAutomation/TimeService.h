@@ -9,7 +9,7 @@
 
 typedef struct {
 	long	minute_of_day;
-	long	day_of_year;
+	long	day_of_week;
 } Time;
 	
 
