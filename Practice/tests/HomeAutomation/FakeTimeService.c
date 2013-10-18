@@ -4,7 +4,7 @@ static Time _time;
 
 void TimeService_Create(void)
 {
-	_time.minute_of_day = TIME_UNKNOWN;
+	_time.minuite_of_day = TIME_UNKNOWN;
 	_time.day_of_week = TIME_UNKNOWN;
 }
 
@@ -18,9 +18,9 @@ void TimeService_getTime(Time *time)
 }
 
 /*-----------------------------------*/
-void FakeTimeService_setMinute(long minute)
+void FakeTimeService_setMinuite(long minuite)
 {
-	_time.minute_of_day = minute;
+	_time.minuite_of_day = minuite;
 }
 
 void FakeTimeService_setDay(enum WEEK_DAY day)

@@ -8,7 +8,7 @@
  **********************************************************/
 
 typedef struct {
-	long	minute_of_day;
+	long	minuite_of_day;
 	long	day_of_week;
 } Time;
 	

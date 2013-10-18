@@ -34,7 +34,7 @@ TEST(LightScheduler, ScheduleOneEverydayNotTimeYet)
 {
 	LightScheduler_scheduleTurnOn(1, EVERYDAY, 60 * 20);
 	FakeTimeService_setDay(MONDAY);
-	FakeTimeService_setMinute(60 * 20 -1);
+	FakeTimeService_setMinuite(60 * 20 -1);
 	LightScheduler_wakeup();
 
 	LONGS_EQUAL(LIGHT_ID_UNKNOWN, LightControllerSpy_getLastId());
@@ -52,7 +52,7 @@ TEST(LightScheduler, NoChangeToLightsDuringInitialization)
 TEST(LightScheduler, NoScheduleNothingHappens)
 {
 	FakeTimeService_setDay(MONDAY);
-	FakeTimeService_setMinute(42);
+	FakeTimeService_setMinuite(42);
 	LightScheduler_wakeup();
 	CHECK_EQUAL(LIGHT_STATE_UNKNOWN, LightControllerSpy_getState());
 	CHECK_EQUAL(LIGHT_STATE_UNKNOWN, LightControllerSpy_getLastId());

@@ -13,6 +13,6 @@ void LightScheduler_wakeup(void)
 {
 }
 
-void LightScheduler_scheduleTurnOn(int id, enum WEEK_DAY day, long minute)
+void LightScheduler_scheduleTurnOn(int id, enum WEEK_DAY day, long minuite)
 {
 }
