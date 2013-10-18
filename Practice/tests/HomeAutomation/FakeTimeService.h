@@ -13,9 +13,6 @@ enum {
 	TIME_UNKNOWN
 };
 
-enum WEEK_DAY {
-	SUNDAY, MONDAY, TUESDAY, WEDNSDAY, THURSDAY, FRYDAY, SATURDAY
-};
 
 /*
 void FakeTimeService_Create(void);
