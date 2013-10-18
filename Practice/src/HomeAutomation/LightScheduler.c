@@ -1,4 +1,6 @@
 #include "LightScheduler.h"
+#include "LightController.h"
+#include "TimeService.h"
 
 void LightScheduler_Create(void)
 {
