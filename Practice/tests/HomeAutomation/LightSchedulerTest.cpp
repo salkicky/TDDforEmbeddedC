@@ -59,7 +59,7 @@ TEST(LightScheduler, ScheduleOnEverydayNotTimeYet)
 }
 
 // [TEST] turn on every day.
-TEST(LightScheduler, ScheduleOnEverydayItsTimke)
+TEST(LightScheduler, ScheduleOnEverydayItsTime)
 {
     LightScheduler_scheduleTurnOn(1, EVERYDAY, 60*20);
     FakeTimeService_setDay(MONDAY);
