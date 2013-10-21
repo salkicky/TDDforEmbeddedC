@@ -69,3 +69,15 @@ TEST(LightScheduler, ScheduleOnEverydayItsTime)
     LONGS_EQUAL(1, LightControllerSpy_getLastId());
 	LONGS_EQUAL(LIGHT_ON, LightControllerSpy_getState());
 }
+
+// [TEST] turn off every day.
+TEST(LightScheduler, ScheduleOffEverydayItsTime)
+{
+    LightScheduler_scheduleTurnOff(1, EVERYDAY, 60*20);
+    FakeTimeService_setDay(MONDAY);
+    FakeTimeService_setMinuite(60*20);
+    LightScheduler_wakeup();
+
+    LONGS_EQUAL(1, LightControllerSpy_getLastId());
+	LONGS_EQUAL(LIGHT_ON, LightControllerSpy_getState());
+}
