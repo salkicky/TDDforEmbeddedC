@@ -79,5 +79,5 @@ TEST(LightScheduler, ScheduleOffEverydayItsTime)
     LightScheduler_wakeup();
 
     LONGS_EQUAL(1, LightControllerSpy_getLastId());
-	LONGS_EQUAL(LIGHT_ON, LightControllerSpy_getState());
+	LONGS_EQUAL(LIGHT_OFF, LightControllerSpy_getState());
 }
