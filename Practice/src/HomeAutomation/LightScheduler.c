@@ -1,18 +1,22 @@
 #include "LightScheduler.h"
 #include "LightController.h"
 
+/* ---------------------------------------- */
+const int UN_USED = -1;
+
 enum EVENT {
 	NOTHING, TURN_ON, TURN_OFF
 };
 
-const int UN_USED = -1;
+typedef enum EVENT EVENT;
 
 typedef struct {
     int id;
-	enum EVENT	event;
-    enum DAY	minuite_of_day;
+	EVENT	event;
+    DAY		minuite_of_day;
 } SCHEDULED_LIGHT_EVENT;
 
+/* ---------------------------------------- */
 static SCHEDULED_LIGHT_EVENT _scheduled_event;
 
 /* ---------------------------------------- */
@@ -60,7 +64,7 @@ void LightScheduler_wakeup(void)
 /**************************************************
  * ONイベントのスケジュールを登録する
  **************************************************/
-void LightScheduler_scheduleTurnOn(int id, enum DAY day, long minuite)
+void LightScheduler_scheduleTurnOn(int id, DAY day, long minuite)
 {
     _scheduled_event.id = id;
     _scheduled_event.event = TURN_ON;
@@ -70,7 +74,7 @@ void LightScheduler_scheduleTurnOn(int id, enum DAY day, long minuite)
 /**************************************************
  * OFFイベントのスケジュールを登録する
  **************************************************/
-void LightScheduler_scheduleTurnOff(int id, enum DAY day, long minuite)
+void LightScheduler_scheduleTurnOff(int id, DAY day, long minuite)
 {
     _scheduled_event.id = id;
     _scheduled_event.event = TURN_OFF;

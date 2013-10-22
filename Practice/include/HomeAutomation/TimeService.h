@@ -17,6 +17,8 @@ enum DAY {
     EVERYDAY, NONE
 };
 
+typedef enum DAY DAY;
+
 void TimeService_Create(void);
 void TimeService_Destroy(void);
 
