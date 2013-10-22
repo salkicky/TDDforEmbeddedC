@@ -12,9 +12,9 @@ typedef struct {
 	long	day_of_week;
 } Time;
 	
-enum WEEK_DAY {
+enum DAY {
 	SUNDAY, MONDAY, TUESDAY, WEDNSDAY, THURSDAY, FRYDAY, SATURDAY,
-    EVERYDAY
+    EVERYDAY, UN_USED
 };
 
 void TimeService_Create(void);

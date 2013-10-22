@@ -13,4 +13,4 @@ void LightController_Destroy(void);
 void LightController_TurnOn(int id);
 void LightController_TurnOff(int id);
 
-#endif  /* D_FakeLightController_H */
+#endif  /* D_LightController_H */

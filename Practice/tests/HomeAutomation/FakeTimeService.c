@@ -23,7 +23,7 @@ void FakeTimeService_setMinuite(long minuite)
 	_time.minuite_of_day = minuite;
 }
 
-void FakeTimeService_setDay(enum WEEK_DAY day)
+void FakeTimeService_setDay(enum DAY day)
 {
 	_time.day_of_week = day;
 }

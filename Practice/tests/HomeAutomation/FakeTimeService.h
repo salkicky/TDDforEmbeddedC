@@ -20,6 +20,6 @@ void FakeTimeService_Destroy(void);
 */
 
 void FakeTimeService_setMinuite(long minuite);
-void FakeTimeService_setDay(enum WEEK_DAY day);
+void FakeTimeService_setDay(enum DAY day);
 
 #endif  /* D_FakeTimeService_H */

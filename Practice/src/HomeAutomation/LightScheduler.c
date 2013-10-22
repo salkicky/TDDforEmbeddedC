@@ -3,13 +3,11 @@
 
 typedef struct {
     int id;
-	int operation;
+	int event;
     long minuite_of_day;
 } SCHEDULED_LIGHT_EVENT;
 
-const int UN_USED = -1;
-
-enum EVENT_OPERATION {
+enum EVENT {
 		NOTHING, TURN_ON, TURN_OFF
 };
 
@@ -22,9 +20,9 @@ static SCHEDULED_LIGHT_EVENT _scheduled_event;
  **************************************************/
 void LightScheduler_Create(void)
 {
-    _scheduled_event.id = UN_USED;
-    _scheduled_event.operation = NOTHING;
-    _scheduled_event.id = UN_USED;
+    _scheduled_event.id = -1;
+    _scheduled_event.event = NOTHING;
+    _scheduled_event.minuite_of_day = UN_USED;
 }
 
 /**************************************************
@@ -50,9 +48,9 @@ void LightScheduler_wakeup(void)
         return;
     }
 
-	if (_scheduled_event.operation == TURN_OFF) {
+	if (_scheduled_event.event == TURN_OFF) {
     	LightController_TurnOff(_scheduled_event.id);
-	} else {
+	} else if (_scheduled_event.event == TURN_ON) {
 		LightController_TurnOn(_scheduled_event.id);
 	}
 }
@@ -60,18 +58,19 @@ void LightScheduler_wakeup(void)
 /**************************************************
  * ONイベントのスケジュールを登録する
  **************************************************/
-void LightScheduler_scheduleTurnOn(int id, enum WEEK_DAY day, long minuite)
+void LightScheduler_scheduleTurnOn(int id, enum DAY day, long minuite)
 {
     _scheduled_event.id = id;
+    _scheduled_event.event = TURN_ON;
     _scheduled_event.minuite_of_day = minuite;
 }
 
 /**************************************************
  * OFFイベントのスケジュールを登録する
  **************************************************/
-void LightScheduler_scheduleTurnOff(int id, enum WEEK_DAY day, long minuite)
+void LightScheduler_scheduleTurnOff(int id, enum DAY day, long minuite)
 {
     _scheduled_event.id = id;
-    _scheduled_event.operation = TURN_OFF;
+    _scheduled_event.event = TURN_OFF;
     _scheduled_event.minuite_of_day = minuite;
 }
