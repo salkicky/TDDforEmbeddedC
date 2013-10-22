@@ -1,15 +1,15 @@
 #include "LightScheduler.h"
 #include "LightController.h"
 
+enum EVENT {
+	NOTHING, TURN_ON, TURN_OFF
+};
+
 typedef struct {
     int id;
-	int event;
-    long minuite_of_day;
+	enum EVENT	event;
+    enum DAY	minuite_of_day;
 } SCHEDULED_LIGHT_EVENT;
-
-enum EVENT {
-		NOTHING, TURN_ON, TURN_OFF
-};
 
 static SCHEDULED_LIGHT_EVENT _scheduled_event;
 
