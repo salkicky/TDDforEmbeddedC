@@ -5,6 +5,8 @@ enum EVENT {
 	NOTHING, TURN_ON, TURN_OFF
 };
 
+const int UN_USED = -1;
+
 typedef struct {
     int id;
 	enum EVENT	event;
@@ -20,9 +22,9 @@ static SCHEDULED_LIGHT_EVENT _scheduled_event;
  **************************************************/
 void LightScheduler_Create(void)
 {
-    _scheduled_event.id = -1;
+    _scheduled_event.id = UN_USED;
     _scheduled_event.event = NOTHING;
-    _scheduled_event.minuite_of_day = UN_USED;
+    _scheduled_event.minuite_of_day = NONE;
 }
 
 /**************************************************

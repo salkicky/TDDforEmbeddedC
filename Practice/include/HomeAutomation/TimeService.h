@@ -14,7 +14,7 @@ typedef struct {
 	
 enum DAY {
 	SUNDAY, MONDAY, TUESDAY, WEDNSDAY, THURSDAY, FRYDAY, SATURDAY,
-    EVERYDAY, UN_USED
+    EVERYDAY, NONE
 };
 
 void TimeService_Create(void);
