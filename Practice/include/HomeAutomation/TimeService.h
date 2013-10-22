@@ -24,4 +24,4 @@ void TimeService_Destroy(void);
 
 void TimeService_getTime(Time *time);
 
-#endif  /* D_FakeTimeService_H */
+#endif  /* D_TimeService_H */

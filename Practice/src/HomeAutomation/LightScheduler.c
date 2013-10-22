@@ -13,22 +13,30 @@ typedef enum EVENT EVENT;
 typedef struct {
     int id;
 	EVENT	event;
-    DAY		minuite_of_day;
+    long	minuite_of_day;
 } SCHEDULED_LIGHT_EVENT;
 
 /* ---------------------------------------- */
 static SCHEDULED_LIGHT_EVENT _scheduled_event;
 
 /* ---------------------------------------- */
+/**************************************************
+ * イベントを登録する
+ **************************************************/
+static void scheduleEvent(int id, DAY day, long minuite, EVENT event)
+{
+	_scheduled_event.id = id;
+    _scheduled_event.event = event;
+    _scheduled_event.minuite_of_day = minuite;
+}
 
+/* ---------------------------------------- */
 /**************************************************
  * コンストラクタ
  **************************************************/
 void LightScheduler_Create(void)
 {
-    _scheduled_event.id = UN_USED;
-    _scheduled_event.event = NOTHING;
-    _scheduled_event.minuite_of_day = NONE;
+	scheduleEvent(UN_USED, NONE, 0, NOTHING);
 }
 
 /**************************************************
@@ -66,9 +74,7 @@ void LightScheduler_wakeup(void)
  **************************************************/
 void LightScheduler_scheduleTurnOn(int id, DAY day, long minuite)
 {
-    _scheduled_event.id = id;
-    _scheduled_event.event = TURN_ON;
-    _scheduled_event.minuite_of_day = minuite;
+	scheduleEvent(id, day, minuite, TURN_ON);
 }
 
 /**************************************************
@@ -76,7 +82,6 @@ void LightScheduler_scheduleTurnOn(int id, DAY day, long minuite)
  **************************************************/
 void LightScheduler_scheduleTurnOff(int id, DAY day, long minuite)
 {
-    _scheduled_event.id = id;
-    _scheduled_event.event = TURN_OFF;
-    _scheduled_event.minuite_of_day = minuite;
+	scheduleEvent(id, day, minuite, TURN_OFF);
 }
+

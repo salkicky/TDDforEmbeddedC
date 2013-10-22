@@ -17,4 +17,4 @@ void LightScheduler_wakeup(void);
 void LightScheduler_scheduleTurnOn(int id, DAY day, long minuite);
 void LightScheduler_scheduleTurnOff(int id, DAY day, long minuite);
 
-#endif  /* D_FakeLightScheduler_H */
+#endif  /* D_LightScheduler_H */
