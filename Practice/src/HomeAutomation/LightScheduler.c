@@ -31,22 +31,35 @@ static void scheduleEvent(int id, DAY day, long minuite_of_day, EVENT event)
 }
 
 /**************************************************
+ * ライトを操作する
+ **************************************************/
+static void controlLight(SCHEDULED_LIGHT_EVENT *light_event)
+{
+	switch(light_event->event) {
+	case TURN_ON:
+		LightController_TurnOn(light_event->id);
+		break;
+	case TURN_OFF:
+		LightController_TurnOff(light_event->id);
+		break;
+	default:
+		break;
+	}
+}
+
+/**************************************************
  * イベントを実行する
  **************************************************/
-static void executeScheduledEvent(Time *time, SCHEDULED_LIGHT_EVENT *scheduled_event)
+static void executeScheduledEvent(Time *time, SCHEDULED_LIGHT_EVENT *light_event)
 {
-    if (scheduled_event->id == UN_USED) {
+    if (light_event->id == UN_USED) {
         return;
     }
-    if (scheduled_event->minuite_of_day != time->minuite_of_day) {
+    if (light_event->minuite_of_day != time->minuite_of_day) {
         return;
     }
 
-	if (scheduled_event->event == TURN_OFF) {
-    	LightController_TurnOff(scheduled_event->id);
-	} else if (scheduled_event->event == TURN_ON) {
-		LightController_TurnOn(scheduled_event->id);
-	}
+	controlLight(light_event);
 }
 
 /* ---------------------------------------- */
