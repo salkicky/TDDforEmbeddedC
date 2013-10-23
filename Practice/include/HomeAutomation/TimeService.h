@@ -8,8 +8,8 @@
  **********************************************************/
 
 typedef struct {
-	long	minuite_of_day;
-	long	day_of_week;
+	int	minuite_of_day;
+	int	day_of_week;
 } Time;
 	
 enum DAY {

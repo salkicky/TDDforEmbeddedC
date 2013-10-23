@@ -19,7 +19,7 @@ void FakeTimeService_Create(void);
 void FakeTimeService_Destroy(void);
 */
 
-void FakeTimeService_setMinuite(long minuite);
-void FakeTimeService_setDay(enum DAY day);
+void FakeTimeService_setMinuite(int minuite);
+void FakeTimeService_setDay(DAY day);
 
 #endif  /* D_FakeTimeService_H */

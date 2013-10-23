@@ -13,7 +13,7 @@ typedef enum EVENT EVENT;
 typedef struct {
     int id;
 	EVENT	event;
-    long	minuite_of_day;
+    int		minuite_of_day;
 } SCHEDULED_LIGHT_EVENT;
 
 /* ---------------------------------------- */
@@ -23,7 +23,7 @@ static SCHEDULED_LIGHT_EVENT _scheduled_event;
 /**************************************************
  * イベントを登録する
  **************************************************/
-static void scheduleEvent(int id, DAY day, long minuite_of_day, EVENT event)
+static void scheduleEvent(int id, DAY day, int minuite_of_day, EVENT event)
 {
 	_scheduled_event.id = id;
     _scheduled_event.event = event;
@@ -93,7 +93,7 @@ void LightScheduler_wakeup(void)
 /**************************************************
  * ONイベントのスケジュールを登録する
  **************************************************/
-void LightScheduler_scheduleTurnOn(int id, DAY day, long minuite_of_day)
+void LightScheduler_scheduleTurnOn(int id, DAY day, int minuite_of_day)
 {
 	scheduleEvent(id, day, minuite_of_day, TURN_ON);
 }
@@ -101,7 +101,7 @@ void LightScheduler_scheduleTurnOn(int id, DAY day, long minuite_of_day)
 /**************************************************
  * OFFイベントのスケジュールを登録する
  **************************************************/
-void LightScheduler_scheduleTurnOff(int id, DAY day, long minuite_of_day)
+void LightScheduler_scheduleTurnOff(int id, DAY day, int minuite_of_day)
 {
 	scheduleEvent(id, day, minuite_of_day, TURN_OFF);
 }

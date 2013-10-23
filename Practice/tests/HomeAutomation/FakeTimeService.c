@@ -18,7 +18,7 @@ void TimeService_getTime(Time *time)
 }
 
 /*-----------------------------------*/
-void FakeTimeService_setMinuite(long minuite)
+void FakeTimeService_setMinuite(int minuite)
 {
 	_time.minuite_of_day = minuite;
 }

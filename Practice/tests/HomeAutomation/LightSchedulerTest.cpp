@@ -19,9 +19,9 @@ static void _checkLightState(int expected_id, int expected_state)
 }
 
 /**************************************************
- * Helper : FakeTimeServiceへ時間をセットする
+ * Helper : 現在時刻をセットする
  **************************************************/
-static void _setFakeTime(DAY day, long minuite_of_day)
+static void _setTime(DAY day, long minuite_of_day)
 {
     FakeTimeService_setDay(day);
     FakeTimeService_setMinuite(minuite_of_day);
@@ -58,7 +58,7 @@ TEST(LightScheduler, NoChangeToLightsDuringInitialization)
 // [TEST] If there is no schedule, no event will be happend.
 TEST(LightScheduler, NoScheduleNothingHappens)
 {
-	_setFakeTime(MONDAY, 42);
+	_setTime(MONDAY, 42);
 
 	LightScheduler_wakeup();
 	_checkLightState(LIGHT_ID_UNKNOWN, LIGHT_STATE_UNKNOWN);
@@ -69,7 +69,7 @@ TEST(LightScheduler, ScheduleOnEverydayNotTimeYet)
 {
 	LightScheduler_scheduleTurnOn(1, EVERYDAY, 60 * 20);
 
-	_setFakeTime(MONDAY, 60*20-1);
+	_setTime(MONDAY, 60*20-1);
 	LightScheduler_wakeup();
 
 	_checkLightState(LIGHT_ID_UNKNOWN, LIGHT_STATE_UNKNOWN);
@@ -80,7 +80,7 @@ TEST(LightScheduler, ScheduleOnEverydayItsTime)
 {
     LightScheduler_scheduleTurnOn(1, EVERYDAY, 60*20);
 
-	_setFakeTime(MONDAY, 60*20);
+	_setTime(MONDAY, 60*20);
     LightScheduler_wakeup();
 
 	_checkLightState(1, LIGHT_ON);
@@ -91,7 +91,7 @@ TEST(LightScheduler, ScheduleOffEverydayItsTime)
 {
     LightScheduler_scheduleTurnOff(1, EVERYDAY, 60*20);
 
-	_setFakeTime(MONDAY, 60*20);
+	_setTime(MONDAY, 60*20);
     LightScheduler_wakeup();
 
 	_checkLightState(1, LIGHT_OFF);
