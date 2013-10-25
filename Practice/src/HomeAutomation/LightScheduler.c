@@ -35,7 +35,7 @@ static void _scheduleEvent(int id, DAY day, int minuite_of_day, EVENT event)
 /**************************************************
  * ライトを操作する
  **************************************************/
-static void _controlLight(SCHEDULED_LIGHT_EVENT *light_event)
+static void _operateLight(SCHEDULED_LIGHT_EVENT *light_event)
 {
 	switch(light_event->event) {
 	case TURN_ON:
@@ -50,6 +50,30 @@ static void _controlLight(SCHEDULED_LIGHT_EVENT *light_event)
 }
 
 /**************************************************
+ * 日をチェック
+ **************************************************/
+static int _isItsDay(DAY today, DAY reaction_day)
+{
+    if (reaction_day == EVERYDAY) {
+        return 1;
+    }
+    
+    if (reaction_day == WEEKEND) {
+        if (today == SATURDAY) {
+            return 1;
+        }
+        else if (today == SUNDAY) {
+            return 1;
+        }
+    }
+    else if (today == reaction_day) {
+        return 1;
+    }
+
+    return 0;
+}
+
+/**************************************************
  * イベントを実行する
  **************************************************/
 static void _executeScheduledEvent(Time *time, SCHEDULED_LIGHT_EVENT *light_event)
@@ -58,7 +82,7 @@ static void _executeScheduledEvent(Time *time, SCHEDULED_LIGHT_EVENT *light_even
         return;
     }
 
-    if (light_event->day != EVERYDAY) {
+    if (_isItsDay(time->day_of_week, light_event->day) == 0) {
         return;
     }
 
@@ -66,7 +90,7 @@ static void _executeScheduledEvent(Time *time, SCHEDULED_LIGHT_EVENT *light_even
         return;
     }
 
-	_controlLight(light_event);
+	_operateLight(light_event);
 }
 
 /* ======================================================================== */

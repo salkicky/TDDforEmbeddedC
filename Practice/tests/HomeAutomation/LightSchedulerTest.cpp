@@ -102,3 +102,42 @@ TEST(LightScheduler, ScheduleTuesdayButItsMonday)
 
 	_checkLightState(LIGHT_ID_UNKNOWN, LIGHT_STATE_UNKNOWN);
 }
+
+// [TEST] schedule Tuesday, and now is Tursday
+TEST(LightScheduler, ScheduleTuesdayItsTime)
+{
+    LightScheduler_scheduleTurnOn(3, TUESDAY, 1200);
+	_setTime(TUESDAY, 60*20);
+    LightScheduler_wakeup();
+
+	_checkLightState(3, LIGHT_ON);
+}
+
+// [TEST] schedule Weekend, but its Friday 
+TEST(LightScheduler, ScheduleWeekendButItsFriday)
+{
+    LightScheduler_scheduleTurnOn(3, WEEKEND, 1200);
+	_setTime(FRIDAY, 60*20);
+    LightScheduler_wakeup();
+
+	_checkLightState(LIGHT_ID_UNKNOWN, LIGHT_STATE_UNKNOWN);
+}
+
+// [TEST] schedule Weekend, but its time
+TEST(LightScheduler, ScheduleWeekendItsSaturday)
+{
+    LightScheduler_scheduleTurnOn(3, WEEKEND, 1200);
+	_setTime(SATURDAY, 60*20);
+    LightScheduler_wakeup();
+
+	_checkLightState(3, LIGHT_ON);
+}
+// [TEST] schedule Weekend, but its time
+TEST(LightScheduler, ScheduleWeekendItsSunday)
+{
+    LightScheduler_scheduleTurnOn(3, WEEKEND, 1200);
+	_setTime(SUNDAY, 60*20);
+    LightScheduler_wakeup();
+
+	_checkLightState(3, LIGHT_ON);
+}
