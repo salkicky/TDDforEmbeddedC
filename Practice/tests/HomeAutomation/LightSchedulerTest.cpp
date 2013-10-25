@@ -7,7 +7,7 @@ extern "C"
 
 #include "CppUTest/TestHarness.h"
 
-/* ------------------------------- */
+/* ======================================================================== */
 
 /**************************************************
  * Helper : 最後のライト操作状態をチェックする
@@ -26,7 +26,8 @@ static void _setTime(DAY day, long minuite_of_day)
     FakeTimeService_setDay(day);
     FakeTimeService_setMinuite(minuite_of_day);
 }
-/* ------------------------------- */
+
+/* ======================================================================== */
 TEST_GROUP(LightScheduler)
 {
     void setup()
@@ -43,11 +44,6 @@ TEST_GROUP(LightScheduler)
 	   TimeService_Destroy();
     }
 };
-
-//TEST(LightScheduler, Create)
-//{
-//  FAIL("Start here");
-//}
 
 // [TEST] 初期化時の内部状態を確認する
 TEST(LightScheduler, NoChangeToLightsDuringInitialization)
@@ -95,4 +91,14 @@ TEST(LightScheduler, ScheduleOffEverydayItsTime)
     LightScheduler_wakeup();
 
 	_checkLightState(1, LIGHT_OFF);
+}
+
+// [TEST] schedule Tuesday, and now is Monday.
+TEST(LightScheduler, ScheduleTuesdayButItsMonday)
+{
+    LightScheduler_scheduleTurnOn(3, TUESDAY, 1200);
+	_setTime(MONDAY, 60*20);
+    LightScheduler_wakeup();
+
+	_checkLightState(LIGHT_ID_UNKNOWN, LIGHT_STATE_UNKNOWN);
 }
