@@ -58,15 +58,15 @@ static int _isItsDay(DAY today, DAY reaction_day)
         return 1;
     }
     
-    if (reaction_day == WEEKEND) {
-        if (today == SATURDAY) {
-            return 1;
-        }
-        else if (today == SUNDAY) {
-            return 1;
-        }
+    if ((reaction_day == WEEKEND) && (today == SATURDAY)) {
+        return 1;
     }
-    else if (today == reaction_day) {
+
+    if ((reaction_day == WEEKEND) && (today == SUNDAY)) {
+        return 1;
+    }
+
+    if (today == reaction_day) {
         return 1;
     }
 
