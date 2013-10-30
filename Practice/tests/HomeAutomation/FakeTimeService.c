@@ -28,6 +28,14 @@ void TimeService_setPeriodicAlarmInSeconds(int seconds, WAKEUP_CALLBACK callback
     _callback = callback;
 }
 
+void TimeService_cancelPeriodicAlarmInSeconds(int seconds, WAKEUP_CALLBACK callback)
+{
+    if ((_period == seconds) && (_callback == callback)) {
+        _period = 0;
+        _callback = (void *)0;
+    }
+}
+
 /* ----------------------------------------- 
  * Test interface 
  * ----------------------------------------- */

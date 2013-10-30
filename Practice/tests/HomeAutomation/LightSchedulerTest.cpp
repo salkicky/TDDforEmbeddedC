@@ -150,7 +150,7 @@ TEST_GROUP(LightSchedulerInitAndCleanup)
     void teardown() {}
 };
 
-
+// [TEST] set periodic callback to TimeService
 TEST(LightSchedulerInitAndCleanup, CreateStartOneMinuiteAlarm)
 {
     LightScheduler_Create();
@@ -158,4 +158,15 @@ TEST(LightSchedulerInitAndCleanup, CreateStartOneMinuiteAlarm)
                     (void *)FakeTimeService_getAlarmCallback());
     LONGS_EQUAL(60, FakeTimeService_getAlarmPeriod());
     LightScheduler_Destroy();
+}
+
+// [TEST] reset callback from TimeService
+TEST(LightSchedulerInitAndCleanup, DestroyCancelOneMinuiteAlarm)
+{
+    LightScheduler_Create();
+    LightScheduler_Destroy();
+
+    POINTERS_EQUAL((void *)0,
+                    (void *)FakeTimeService_getAlarmCallback());
+
 }
