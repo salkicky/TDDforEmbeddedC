@@ -99,6 +99,9 @@ static void _executeScheduledEvent(Time *time, SCHEDULED_LIGHT_EVENT *light_even
  **************************************************/
 void LightScheduler_Create(void)
 {
+    /* set wakeup calljack */
+    TimeService_setPeriodicAlarmInSeconds(60, LightScheduler_wakeup);
+    /* initialize event */
 	_scheduleEvent(UN_USED, NONE, 0, NOTHING);
 }
 

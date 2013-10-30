@@ -19,10 +19,12 @@ enum DAY {
 };
 
 typedef enum DAY DAY;
+typedef void (*WAKEUP_CALLBACK)(void);
 
 void TimeService_Create(void);
 void TimeService_Destroy(void);
 
 void TimeService_getTime(Time *time);
+void TimeService_setPeriodicAlarmInSeconds(int seconds, WAKEUP_CALLBACK callback);
 
 #endif  /* D_TimeService_H */

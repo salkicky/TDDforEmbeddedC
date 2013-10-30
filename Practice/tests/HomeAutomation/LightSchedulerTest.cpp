@@ -145,16 +145,17 @@ TEST(LightScheduler, ScheduleWeekendItsSunday)
 /* ============================================================== */
 TEST_GROUP(LightSchedulerInitAndCleanup)
 {
-    void setup() {};
-    void teardown() {};
-}
+    void setup() {}
+
+    void teardown() {}
+};
 
 
 TEST(LightSchedulerInitAndCleanup, CreateStartOneMinuiteAlarm)
 {
     LightScheduler_Create();
     POINTERS_EQUAL((void *)LightScheduler_wakeup,
-                    (void *)FakeTimeService_GetAlarmCallback);
-    LONGS_EQUAL(60, FakeTimeService_GetAlarmPeriod());
+                    (void *)FakeTimeService_getAlarmCallback());
+    LONGS_EQUAL(60, FakeTimeService_getAlarmPeriod());
     LightScheduler_Destroy();
 }

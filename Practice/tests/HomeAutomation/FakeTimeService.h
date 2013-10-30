@@ -22,4 +22,7 @@ void FakeTimeService_Destroy(void);
 void FakeTimeService_setMinuite(int minuite);
 void FakeTimeService_setDay(DAY day);
 
+WAKEUP_CALLBACK FakeTimeService_getAlarmCallback(void);
+int FakeTimeService_getAlarmPeriod(void);
+
 #endif  /* D_FakeTimeService_H */
