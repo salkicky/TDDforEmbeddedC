@@ -35,4 +35,8 @@ int LightControllerSpy_getLastState(void)
 	return _last_state;
 }
 
+int LightControllerSpy_getLightState(int id)
+{
+    return LIGHT_STATE_UNKNOWN;
 
+}

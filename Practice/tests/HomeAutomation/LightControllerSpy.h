@@ -23,5 +23,6 @@ typedef enum LIGHT_ID LIGHT_ID;
 
 int LightControllerSpy_getLastId(void);
 int LightControllerSpy_getLastState(void);
+int LightControllerSpy_getLightState(int id);
 
 #endif  /* D_FakeLightControllerSpy_H */

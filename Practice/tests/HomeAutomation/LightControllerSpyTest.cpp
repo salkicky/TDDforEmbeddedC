@@ -38,3 +38,10 @@ TEST(LightControllerSpy, TurnOff)
 	CHECK_EQUAL(LIGHT_OFF, LightControllerSpy_getLastState());
 }
 
+TEST(LightControllerSpy, RememberAllLightState)
+{
+    LightController_TurnOn(1);
+    LightController_TurnOn(31);
+	CHECK_EQUAL(LIGHT_ON, LightControllerSpy_getLightState(1));
+	CHECK_EQUAL(LIGHT_ON, LightControllerSpy_getLightState(31));
+}
