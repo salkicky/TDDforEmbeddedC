@@ -30,7 +30,7 @@ int LightControllerSpy_getLastId(void)
 	return _id;	
 }
 
-int LightControllerSpy_getState(void)
+int LightControllerSpy_getLastState(void)
 {
 	return _last_state;
 }
