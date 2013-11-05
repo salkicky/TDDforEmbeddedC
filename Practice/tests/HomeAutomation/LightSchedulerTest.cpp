@@ -14,8 +14,15 @@ extern "C"
  **************************************************/
 static void _checkLightState(int expected_id, int expected_state)
 {
-	LONGS_EQUAL(expected_id, LightControllerSpy_getLastId());
-	LONGS_EQUAL(expected_state, LightControllerSpy_getLastState());
+    if (expected_id == LIGHT_ID_UNKNOWN)
+    {
+        LONGS_EQUAL(expected_id, LightControllerSpy_getLastId());
+        LONGS_EQUAL(expected_state, LightControllerSpy_getLastState());
+    }
+    else 
+    {
+        LONGS_EQUAL(expected_state, LightControllerSpy_getLightState(expected_id));
+    }
 }
 
 /**************************************************

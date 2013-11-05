@@ -32,6 +32,8 @@ void LightController_TurnOff(int id)
 {
     _id = id;
     _last_state = LIGHT_OFF;
+
+    _light_state[_id] = _last_state;
 }
 
 int LightControllerSpy_getLastId(void)
