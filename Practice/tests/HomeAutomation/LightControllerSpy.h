@@ -8,6 +8,7 @@
  * LightControllerSpy is responsible for ...
  *
  **********************************************************/
+#define MAX_LIGHT_ID    50
 
 enum LIGHT_STATE {
 	LIGHT_STATE_UNKNOWN = -1,
