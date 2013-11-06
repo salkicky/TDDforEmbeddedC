@@ -2,6 +2,8 @@
 #include "LightController.h"
 
 /* ======================================================================== */
+#define MAX_EVENT 50
+
 const int UN_USED = -1;
 
 enum EVENT {
@@ -19,6 +21,7 @@ typedef struct {
 
 /* ======================================================================== */
 static SCHEDULED_LIGHT_EVENT _scheduled_event;
+static SCHEDULED_LIGHT_EVENT _scheduled_events[MAX_EVENT];
 
 /* ======================================================================== */
 /**************************************************
@@ -26,6 +29,18 @@ static SCHEDULED_LIGHT_EVENT _scheduled_event;
  **************************************************/
 static void _scheduleEvent(int id, DAY day, int minuite_of_day, EVENT event)
 {
+    int i;
+
+    for (i = 0; i < MAX_EVENT; i++) {
+        if (UN_USED == _scheduled_events[i].id) {
+            _scheduled_events[i].id = id;
+            _scheduled_events[i].day = day;
+            _scheduled_events[i].event = event;
+            _scheduled_events[i].minuite_of_day = minuite_of_day;
+            break;
+        }
+    }
+
 	_scheduled_event.id = id;
     _scheduled_event.day = day;
     _scheduled_event.event = event;
@@ -99,10 +114,16 @@ static void _executeScheduledEvent(Time *time, SCHEDULED_LIGHT_EVENT *light_even
  **************************************************/
 void LightScheduler_Create(void)
 {
-    /* set wakeup calljack */
-    TimeService_setPeriodicAlarmInSeconds(60, LightScheduler_wakeup);
+    int i;
+
     /* initialize event */
-	_scheduleEvent(UN_USED, NONE, 0, NOTHING);
+    for (i = 0; i < MAX_EVENT; i++) {
+        _scheduled_events[i].id = UN_USED;
+    }
+    _scheduled_event.id = UN_USED;
+
+    /* set wakeup callback */
+    TimeService_setPeriodicAlarmInSeconds(60, LightScheduler_wakeup);
 }
 
 /**************************************************
@@ -119,9 +140,15 @@ void LightScheduler_Destroy(void)
 void LightScheduler_wakeup(void)
 {
     Time time;
+    int i;
 
     TimeService_getTime(&time);
 
+    for (i= 0; i < MAX_EVENT; i++) {
+        if (UN_USED != _scheduled_events[i].id) {
+            _executeScheduledEvent(&time, &_scheduled_events[i]);
+        }
+    }
 	_executeScheduledEvent(&time, &_scheduled_event);
 }
 
