@@ -149,6 +149,7 @@ TEST(LightScheduler, ScheduleWeekendItsSunday)
 	_checkLightState(3, LIGHT_ON);
 }
 
+// [TEST] schedule two events at the same time
 TEST(LightScheduler, ScheduleTwoEventsAtTheSameTime)
 {
     LightScheduler_scheduleTurnOn(3, SUNDAY, 1200);

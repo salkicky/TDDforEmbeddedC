@@ -20,7 +20,6 @@ typedef struct {
 } SCHEDULED_LIGHT_EVENT;
 
 /* ======================================================================== */
-static SCHEDULED_LIGHT_EVENT _scheduled_event;
 static SCHEDULED_LIGHT_EVENT _scheduled_events[MAX_EVENT];
 
 /* ======================================================================== */
@@ -40,11 +39,6 @@ static void _scheduleEvent(int id, DAY day, int minuite_of_day, EVENT event)
             break;
         }
     }
-
-	_scheduled_event.id = id;
-    _scheduled_event.day = day;
-    _scheduled_event.event = event;
-    _scheduled_event.minuite_of_day = minuite_of_day;
 }
 
 /**************************************************
@@ -120,7 +114,6 @@ void LightScheduler_Create(void)
     for (i = 0; i < MAX_EVENT; i++) {
         _scheduled_events[i].id = UN_USED;
     }
-    _scheduled_event.id = UN_USED;
 
     /* set wakeup callback */
     TimeService_setPeriodicAlarmInSeconds(60, LightScheduler_wakeup);
@@ -149,7 +142,6 @@ void LightScheduler_wakeup(void)
             _executeScheduledEvent(&time, &_scheduled_events[i]);
         }
     }
-	_executeScheduledEvent(&time, &_scheduled_event);
 }
 
 /**************************************************
