@@ -124,6 +124,7 @@ void LightScheduler_Create(void)
  **************************************************/
 void LightScheduler_Destroy(void)
 {
+    /* cancel wakeup callback from TimeService */
     TimeService_cancelPeriodicAlarmInSeconds(60, LightScheduler_wakeup);
 }
 
